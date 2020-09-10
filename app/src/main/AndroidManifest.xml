@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.exercise_one.ExerciseOneActivity"/>
+        <activity android:name=".ui.exercise_nine.ExerciseNineActivity" />
     </application>
 
 </manifest>
