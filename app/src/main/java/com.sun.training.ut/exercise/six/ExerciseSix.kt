@@ -22,7 +22,7 @@ fun calculateFreeParkingTime(totalMoney: Int, watchMovie: Boolean): Int {
     val freeTimeByTotalMoney = when {
         totalMoney < FIRST_MONEY_POINT -> 0
         totalMoney in FIRST_MONEY_POINT until SECOND_MONEY_POINT -> FIRST_FREE_TIME
-        // totalMoney <= SECOND_MONEY_POINT
+        // SECOND_MONEY_POINT <= totalMoney
         else -> SECOND_FREE_TIME
     }
     return if (watchMovie) freeTimeByTotalMoney + WATCH_MOVIE_FREE_TIME else freeTimeByTotalMoney
