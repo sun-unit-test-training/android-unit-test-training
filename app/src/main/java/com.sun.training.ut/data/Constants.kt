@@ -1,0 +1,55 @@
+package com.sun.training.ut.data
+
+object Constants {
+
+    const val BASE_BADMINTON_FEE: Int = 1800
+    const val BADMINTON_FEE_1200: Int = 1200
+    const val BADMINTON_FEE_1400: Int = 1400
+    const val BADMINTON_FEE_1600: Int = 1600
+
+    enum class Gender(val type: Int) {
+        MALE(1),
+        FEMALE(2)
+    }
+
+    /**
+     * Because min api 19
+     */
+    enum class DayOfWeek {
+        /**
+         * The singleton instance for the day-of-week of Monday.
+         * This has the numeric value of `1`.
+         */
+        MONDAY,
+        /**
+         * The singleton instance for the day-of-week of Tuesday.
+         * This has the numeric value of `2`.
+         */
+        TUESDAY,
+        /**
+         * The singleton instance for the day-of-week of Wednesday.
+         * This has the numeric value of `3`.
+         */
+        WEDNESDAY,
+        /**
+         * The singleton instance for the day-of-week of Thursday.
+         * This has the numeric value of `4`.
+         */
+        THURSDAY,
+        /**
+         * The singleton instance for the day-of-week of Friday.
+         * This has the numeric value of `5`.
+         */
+        FRIDAY,
+        /**
+         * The singleton instance for the day-of-week of Saturday.
+         * This has the numeric value of `6`.
+         */
+        SATURDAY,
+        /**
+         * The singleton instance for the day-of-week of Sunday.
+         * This has the numeric value of `7`.
+         */
+        SUNDAY;
+    }
+}
