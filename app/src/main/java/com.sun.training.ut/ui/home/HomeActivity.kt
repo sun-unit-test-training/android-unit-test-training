@@ -7,9 +7,10 @@ import com.sun.training.ut.R
 import com.sun.training.ut.data.model.Exercise
 import com.sun.training.ut.databinding.ActivityHomeBinding
 import com.sun.training.ut.ui.base.BaseActivity
-import com.sun.training.ut.ui.exercise_nine.ExerciseNineActivity
 import com.sun.training.ut.ui.excercise_six.ExerciseSixActivity
 import com.sun.training.ut.ui.exercise_eight.ExerciseEightActivity
+import com.sun.training.ut.ui.exercise_five.ExerciseFiveActivity
+import com.sun.training.ut.ui.exercise_nine.ExerciseNineActivity
 import com.sun.training.ut.ui.exercise_one.ExerciseOneActivity
 import com.sun.training.ut.ui.exercise_seven.ExerciseSevenActivity
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -36,7 +37,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeIte
                     Exercise("Ex2: ATM của ngân hàng Việt Nam", this@HomeActivity.javaClass),
                     Exercise("Ex3: Quần áo nam trên Hoàn Kiếm", this@HomeActivity.javaClass),
                     Exercise("Ex4: Mr.A đang làm 1 app về calendar", this@HomeActivity.javaClass),
-                    Exercise("Ex5: 8 pieces pizza", this@HomeActivity.javaClass),
+                    Exercise("Ex5: 8 pieces pizza", ExerciseFiveActivity::class.java),
                     Exercise("Ex6: Trung tâm mua sắm Tây Hồ", ExerciseSixActivity::class.java),
                     Exercise("Ex7: Vietnam Mart", ExerciseSevenActivity::class.java),
                     Exercise(
