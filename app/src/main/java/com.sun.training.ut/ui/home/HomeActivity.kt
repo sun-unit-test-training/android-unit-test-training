@@ -11,6 +11,7 @@ import com.sun.training.ut.ui.excercise_six.ExerciseSixActivity
 import com.sun.training.ut.ui.exercise_eight.ExerciseEightActivity
 import com.sun.training.ut.ui.exercise_five.ExerciseFiveActivity
 import com.sun.training.ut.ui.exercise_nine.ExerciseNineActivity
+import com.sun.training.ut.ui.exercise_four.ExerciseFourActivity
 import com.sun.training.ut.ui.exercise_one.ExerciseOneActivity
 import com.sun.training.ut.ui.exercise_seven.ExerciseSevenActivity
 import com.sun.training.ut.ui.exercise_three.ExerciseThreeActivity
@@ -38,8 +39,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeIte
                     Exercise("Ex1: Bia hơi Keangnam", ExerciseOneActivity::class.java),
                     Exercise("Ex2: ATM của ngân hàng Việt Nam", ExerciseTwoActivity::class.java),
                     Exercise("Ex3: Quần áo nam trên Hoàn Kiếm", ExerciseThreeActivity::class.java),
-                    Exercise("Ex3: Quần áo nam trên Hoàn Kiếm", this@HomeActivity.javaClass),
-                    Exercise("Ex4: Mr.A đang làm 1 app về calendar", this@HomeActivity.javaClass),
+                    Exercise(
+                        "Ex4: Mr.A đang làm 1 app về calendar",
+                        ExerciseFourActivity::class.java
+                    ),
                     Exercise("Ex5: 8 pieces pizza", ExerciseFiveActivity::class.java),
                     Exercise("Ex6: Trung tâm mua sắm Tây Hồ", ExerciseSixActivity::class.java),
                     Exercise("Ex7: Vietnam Mart", ExerciseSevenActivity::class.java),

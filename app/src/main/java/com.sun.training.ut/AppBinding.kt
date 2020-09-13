@@ -16,9 +16,6 @@ object AppBinding {
     fun price(tv: TextView, price: Int) {
         tv.text = price.formatNumberPrice()
     }
-<<<<<<< HEAD
-}
-=======
 
     @BindingAdapter("is24Hour")
     @JvmStatic
@@ -26,4 +23,3 @@ object AppBinding {
         timePicker.setIs24HourView(true)
     }
 }
->>>>>>> Refs exercise two: Calculate fee pay ATM
