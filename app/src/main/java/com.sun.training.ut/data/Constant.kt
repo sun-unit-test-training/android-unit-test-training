@@ -86,4 +86,9 @@ object Constant {
     const val DISCOUNT_7 = 7
     const val DISCOUNT_5 = 5
     const val DISCOUNT_12 = 12
+
+    //Exercise 2:
+    const val TIME_8_45 = 526
+    const val TIME_17_59 = 1079
+    const val FEE_110 = 110
 }
