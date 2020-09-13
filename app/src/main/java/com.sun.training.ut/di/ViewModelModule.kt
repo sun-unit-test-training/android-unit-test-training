@@ -7,6 +7,7 @@ import com.sun.training.ut.ui.exercise_one.ExerciseOneViewModel
 import com.sun.training.ut.ui.exercise_seven.ExerciseSevenViewModel
 import com.sun.training.ut.ui.exercise_five.ExerciseFiveViewModel
 import com.sun.training.ut.ui.exercise_three.ExerciseThreeViewModel
+import com.sun.training.ut.ui.exercise_two.ExerciseTwoViewModel
 import com.sun.training.ut.ui.home.HomeViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -18,6 +19,7 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModel { HomeViewModel(get()) }
     viewModel { ExerciseOneViewModel() }
+    viewModel { ExerciseTwoViewModel() }
     viewModel { ExerciseThreeViewModel() }
     viewModel { ExerciseFiveViewModel() }
     viewModel { ExerciseSixViewModel() }

@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.exercise_one.ExerciseOneActivity"/>
+        <activity android:name=".ui.exercise_two.ExerciseTwoActivity" />
         <activity android:name=".ui.exercise_three.ExerciseThreeActivity"/>
         <activity android:name=".ui.exercise_five.ExerciseFiveActivity" />
         <activity android:name=".ui.excercise_six.ExerciseSixActivity"/>

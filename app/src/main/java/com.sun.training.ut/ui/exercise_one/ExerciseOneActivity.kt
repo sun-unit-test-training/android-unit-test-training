@@ -1,15 +1,10 @@
 package com.sun.training.ut.ui.exercise_one
 
 import android.os.Bundle
-import android.view.View
-import android.widget.CompoundButton
-import androidx.lifecycle.Observer
 import com.sun.training.ut.BR
 import com.sun.training.ut.R
-import com.sun.training.ut.data.model.Beer
 import com.sun.training.ut.databinding.ActivityExerciseOneBinding
 import com.sun.training.ut.ui.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_exercise_one.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ExerciseOneActivity : BaseActivity<ActivityExerciseOneBinding, ExerciseOneViewModel>() {
