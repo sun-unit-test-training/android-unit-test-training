@@ -1,6 +1,6 @@
 package com.sun.training.ut.di
 
-import com.sun.training.ut.ui.sample.SampleViewModel
+import com.sun.training.ut.ui.home.HomeViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -9,6 +9,6 @@ import org.koin.dsl.module
  * @param get() is a component given
  */
 val viewModelModule = module {
-    viewModel { SampleViewModel(get()) }
+    viewModel { HomeViewModel(get()) }
 }
 
