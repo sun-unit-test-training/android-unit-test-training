@@ -7,6 +7,7 @@ import com.sun.training.ut.R
 import com.sun.training.ut.data.model.Exercise
 import com.sun.training.ut.databinding.ActivityHomeBinding
 import com.sun.training.ut.ui.base.BaseActivity
+import com.sun.training.ut.ui.exercise_one.ExerciseOneActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
@@ -25,18 +26,23 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeIte
 
     private fun setUpAdapter() {
         viewBinding.adapter = HomeAdapter(this).apply {
-            submitList(listOf(
-                Exercise("Ex1: Bia hơi Keangnam", this@HomeActivity.javaClass),
-                Exercise("Ex2: ATM của ngân hàng Việt Nam", this@HomeActivity.javaClass),
-                Exercise("Ex3: Quần áo nam trên Hoàn Kiếm", this@HomeActivity.javaClass),
-                Exercise("Ex4: Mr.A đang làm 1 app về calendar", this@HomeActivity.javaClass),
-                Exercise("Ex5: 8 pieces pizza", this@HomeActivity.javaClass),
-                Exercise("Ex6: Trung tâm mua sắm Tây Hồ", this@HomeActivity.javaClass),
-                Exercise("Ex7: Vietnam Mart", this@HomeActivity.javaClass),
-                Exercise("Ex8: Mr. A đến một sân chơi nọ để chơi cầu lông", this@HomeActivity.javaClass),
-                Exercise("Ex9: Roll Playng Game Hanoi quest", this@HomeActivity.javaClass),
-                Exercise("Ex10: Nhà hàng Nam Từ Liêm", this@HomeActivity.javaClass)
-            ))
+            submitList(
+                listOf(
+                    Exercise("Ex1: Bia hơi Keangnam", ExerciseOneActivity::class.java),
+                    Exercise("Ex2: ATM của ngân hàng Việt Nam", this@HomeActivity.javaClass),
+                    Exercise("Ex3: Quần áo nam trên Hoàn Kiếm", this@HomeActivity.javaClass),
+                    Exercise("Ex4: Mr.A đang làm 1 app về calendar", this@HomeActivity.javaClass),
+                    Exercise("Ex5: 8 pieces pizza", this@HomeActivity.javaClass),
+                    Exercise("Ex6: Trung tâm mua sắm Tây Hồ", this@HomeActivity.javaClass),
+                    Exercise("Ex7: Vietnam Mart", this@HomeActivity.javaClass),
+                    Exercise(
+                        "Ex8: Mr. A đến một sân chơi nọ để chơi cầu lông",
+                        this@HomeActivity.javaClass
+                    ),
+                    Exercise("Ex9: Roll Playng Game Hanoi quest", this@HomeActivity.javaClass),
+                    Exercise("Ex10: Nhà hàng Nam Từ Liêm", this@HomeActivity.javaClass)
+                )
+            )
         }
     }
 

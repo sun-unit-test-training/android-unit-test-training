@@ -1,0 +1,80 @@
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.8.0"
+}
+
+def coverageSourceDirs = [
+        'src/main/kotlin',
+        'src/debug/kotlin'
+]
+
+def jacocoDepends = project.hasProperty('ciBuild') ? ['testDevelopDebugUnitTest']
+        : ['testDevelopDebugUnitTest', 'createDevelopDebugCoverageReport']
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: jacocoDepends) {
+    group = 'Reporting'
+    description = 'Generate JaCoCo coverage reports for DevDebug build'
+
+    //Define which type of report want to generate
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    // what to exclude from coverage report
+    // UI, "noise", generated classes, platform classes, etc.
+    def excludes = [
+            '**/R.class',
+            '**/R$*.class',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            '**/*$ViewInjector*.*',
+            '**/*$ViewBinder*.*',
+            '**/databinding/*Binding.*', // Data binding
+            '**/*_Impl.*', // Room auto-generated code
+            '**/*Module.*', // Modules for Dagger
+            '**/*Module_Contribute*.*',
+            '**/Dagger*.*',
+            '**/*Module_Provide*Factory.*',
+            '**/*_Factory.*',
+            '**/*_MembersInjector.*', // Dagger auto-generated code
+            'android/**/*.*',
+            'com/**/*.*'
+    ]
+    def javaClasses = fileTree(
+            dir: "$buildDir/intermediates/classes/dev/debug",
+            excludes: excludes
+    )
+    def kotlinClasses = fileTree(
+            dir: "$buildDir/tmp/kotlin-classes/devDebug",
+            excludes: excludes
+    )
+    // generated classes
+    classDirectories.from = files([javaClasses, kotlinClasses])
+
+    // sources
+    sourceDirectories.from = files(coverageSourceDirs)
+
+    executionData.from = fileTree(
+            dir: "$buildDir",
+            include: [
+                    'jacoco/testDevelopDebugUnitTest.exec',
+                    'outputs/code-coverage/connected/flavors/**/*coverage.ec'
+            ]
+    )
+
+    // Bit hacky but fixes https://code.google.com/p/android/issues/detail?id=69174.
+    // We iterate through the compiled .class tree and rename $$ to $.
+    doFirst {
+        files("$buildDir/intermediates/classes/dev/debug").getFiles().each { file ->
+            if (file.name.contains('$$')) {
+                file.renameTo(file.path.replace('$$', '$'))
+            }
+        }
+    }
+}
