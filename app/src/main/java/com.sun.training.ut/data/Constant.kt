@@ -2,6 +2,7 @@ package com.sun.training.ut.data
 
 object Constant {
 
+    //Exercise 1:
     const val REGULAR_PRICE = 490
     const val VOUCHER_PRICE = 100
     const val TIME_PRICE = 290
@@ -79,4 +80,10 @@ object Constant {
         PIZZA_SECOND_FREE("Free pizza second\n"),
         REGULAR_FEE("Regular fee\n")
     }
+
+    //Exercise 3:
+    const val DEFAULT_ITEM_HAVE_DISCOUNT = 7
+    const val DISCOUNT_7 = 7
+    const val DISCOUNT_5 = 5
+    const val DISCOUNT_12 = 12
 }
