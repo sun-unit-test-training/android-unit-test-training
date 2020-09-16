@@ -52,4 +52,17 @@
 ②：Trường hợp đến lấy tại cửa hàng thì được miễn phí pizza thứ 2.\n
 ③：Trường hợp giao đến nhà và có coupon giảm giá thì được giảm 20% tổng hoá đơn.\n
     </string>
+
+    <!--Text use for exercise 3-->
+    <string name="condition_3">
+        Điều kiện tiên quyết：\n
+①：Trong số các mặt hàng mua, có cả áo sơ mi trắng và cà vạt, thì sẽ được giảm 5% trên tổng hoá đơn.  \n
+②：Trường hợp mua từ trên 7 mặt hàng, được giảm 7% trên tổng hoá đơn. \n
+③：Có thể áp dụng đồng thời ưu đãi ① và ②, tức là sẽ được giảm 12% trên tổng hoá đơn.\n
+④：Thứ tự ưu tiên về logic áp dụng giảm giá như bên dưới:\n
+・Có mua từ 7 mặt hàng trở lên hay không? \n
+・Có bao gồm áo sơ mi trắng hay không? \n
+・Có bao gồm cà vạt hay không? \n
+    </string>
+    <string name="total_discount">Giảm giá</string>
 </resources>
