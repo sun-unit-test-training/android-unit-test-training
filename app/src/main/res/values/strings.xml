@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Training Unit Test</string>
+
+
     <string name="calculate">Tính</string>
     <string name="total_bill">Tổng tiền</string>
     <string name="condition">①：Thông thường giá 1 cốc bia là 490円/yên\n②：Từ 16:00 đến17:59 là thời gian ưu đãi nên giá 1 cốc là 290円/yên.\n③：Nếu có voucher giảm giá thì được ưu đãi cốc đầu tiên là 100 円/yên, bất kể thời gian nào.\n④：Voucher giảm giá được sử dụng kể cả trong thời gian ưu đãi\n⑤：Tính theo giá rẻ nhất vào thời điểm order</string>
@@ -10,4 +12,17 @@
     <string name="use_voucher">Sử dụng voucher giảm giá:</string>
     <string name="total_beer">Nhập số cốc bia</string>
     <string name="name_beer">Số cốc bia đã uống:</string>
+
+    <!--Text use for exercise 9-->
+    <string name="magic_wand">Đũa phép</string>
+    <string name="master">Quân sư</string>
+    <string name="room_key">Chìa khóa</string>
+    <string name="light_sword">Kiếm ánh sáng</string>
+    <string name="go">Đánh Boss</string>
+    <string name="can_not_find_room">Bạn không có công cụ đũa phép hoặc quân sư thì còn lâu mới tìm được phòng có Boss ( ͡🔥 ͜ʖ ͡🔥)</string>
+    <string name="can_not_go_room">Bạn không có chìa khóa bóng đêm thì chỉ có thể đứng ngoài phòng nhìn Boss thôi à ( ͡🔥 ⏏ ͡🔥)</string>
+    <string name="can_not_beat_boss">Bạn không có kiếm ánh sáng  thì còn lâu bạn mới đánh nổi Boss, chúc mừng bạn nhận được một trận đòn sấp mặt từ Boss 👋≧◉ᴥ◉≦</string>
+    <string name="beat_boss">Chúc mừng! Bạn vừa đánh bại Boss và trở thành thiên hạ đệ nhất kiếm ( ͡❛ ͜ʖ ͡❛)✊</string>
+    <string name="exercise_9_title">Exercise 9\nHanoi quest</string>
+    <string name="exercise_nine_condition">①：Để tìm được căn phòng nơi có Big Boss, cần mang theo công cụ là "Đũa phép" hoặc là cần có "Quân sư" làm bạn đồng hành\n②：Khi vào trong phòng có Big Boss , cần mang theo công cụ là "Chìa khoá bóng đêm".\n③：Để đánh bại Big Boss, dũng sĩ Bánh Mì cần phải mang theo vũ khí là "Kiếm ánh sáng" </string>
 </resources>
