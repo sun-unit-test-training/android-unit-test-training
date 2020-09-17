@@ -27,22 +27,22 @@ class ExerciseSixViewModelTest {
     }
 
     @Test
-    fun calculateFreeParkingTime_noWatchMovie_1() {
+    fun calculateFreeParkingTime_noWatchMovie_negativeMoney() {
         Assert.assertEquals(0, viewModel.calculateFreeParkingMinute(-1, false))
     }
 
     @Test
-    fun calculateFreeParkingTime_noWatchMovie_2() {
+    fun calculateFreeParkingTime_noWatchMovie_zeroMoney() {
         Assert.assertEquals(0, viewModel.calculateFreeParkingMinute(0, false))
     }
 
     @Test
-    fun calculateFreeParkingTime_noWatchMovie_3() {
+    fun calculateFreeParkingTime_noWatchMovie_underFirstMoneyPoint() {
         Assert.assertEquals(0, viewModel.calculateFreeParkingMinute(FIRST_MONEY_POINT - 1, false))
     }
 
     @Test
-    fun calculateFreeParkingTime_noWatchMovie_4() {
+    fun calculateFreeParkingTime_noWatchMovie_firstMoneyPoint() {
         Assert.assertEquals(
             FIRST_FREE_TIME,
             viewModel.calculateFreeParkingMinute(FIRST_MONEY_POINT, false)
@@ -50,7 +50,7 @@ class ExerciseSixViewModelTest {
     }
 
     @Test
-    fun calculateFreeParkingTime_noWatchMovie_5() {
+    fun calculateFreeParkingTime_noWatchMovie_aboveFirstMoneyPoint() {
         Assert.assertEquals(
             FIRST_FREE_TIME,
             viewModel.calculateFreeParkingMinute(FIRST_MONEY_POINT + 1, false)
@@ -58,7 +58,7 @@ class ExerciseSixViewModelTest {
     }
 
     @Test
-    fun calculateFreeParkingTime_noWatchMovie_6() {
+    fun calculateFreeParkingTime_noWatchMovie_underSecondMoneyPoint() {
         Assert.assertEquals(
             FIRST_FREE_TIME,
             viewModel.calculateFreeParkingMinute(SECOND_MONEY_POINT - 1, false)
@@ -66,7 +66,7 @@ class ExerciseSixViewModelTest {
     }
 
     @Test
-    fun calculateFreeParkingTime_noWatchMovie_7() {
+    fun calculateFreeParkingTime_noWatchMovie_secondMoneyPoint() {
         Assert.assertEquals(
             SECOND_FREE_TIME,
             viewModel.calculateFreeParkingMinute(SECOND_MONEY_POINT, false)
@@ -74,7 +74,7 @@ class ExerciseSixViewModelTest {
     }
 
     @Test
-    fun calculateFreeParkingTime_noWatchMovie_8() {
+    fun calculateFreeParkingTime_noWatchMovie_aboveSecondMoneyPoint() {
         Assert.assertEquals(
             SECOND_FREE_TIME,
             viewModel.calculateFreeParkingMinute(SECOND_MONEY_POINT + 1, false)
@@ -82,17 +82,17 @@ class ExerciseSixViewModelTest {
     }
 
     @Test
-    fun calculateFreeParkingTime_watchMovie_1() {
+    fun calculateFreeParkingTime_watchMovie_negativeMoney() {
         Assert.assertEquals(WATCH_MOVIE_FREE_TIME, viewModel.calculateFreeParkingMinute(-1, true))
     }
 
     @Test
-    fun calculateFreeParkingTime_watchMovie_2() {
+    fun calculateFreeParkingTime_watchMovie_zeroMoney() {
         Assert.assertEquals(WATCH_MOVIE_FREE_TIME, viewModel.calculateFreeParkingMinute(0, true))
     }
 
     @Test
-    fun calculateFreeParkingTime_watchMovie_3() {
+    fun calculateFreeParkingTime_watchMovie_underFirstMoneyPoint() {
         Assert.assertEquals(
             WATCH_MOVIE_FREE_TIME,
             viewModel.calculateFreeParkingMinute(FIRST_MONEY_POINT - 1, true)
@@ -100,7 +100,7 @@ class ExerciseSixViewModelTest {
     }
 
     @Test
-    fun calculateFreeParkingTime_watchMovie_4() {
+    fun calculateFreeParkingTime_watchMovie_firstMoneyPoint() {
         Assert.assertEquals(
             FIRST_FREE_TIME + WATCH_MOVIE_FREE_TIME,
             viewModel.calculateFreeParkingMinute(FIRST_MONEY_POINT, true)
@@ -108,7 +108,7 @@ class ExerciseSixViewModelTest {
     }
 
     @Test
-    fun calculateFreeParkingTime_watchMovie_5() {
+    fun calculateFreeParkingTime_watchMovie_aboveFirstMoneyPoint() {
         Assert.assertEquals(
             FIRST_FREE_TIME + WATCH_MOVIE_FREE_TIME,
             viewModel.calculateFreeParkingMinute(FIRST_MONEY_POINT + 1, true)
@@ -116,7 +116,7 @@ class ExerciseSixViewModelTest {
     }
 
     @Test
-    fun calculateFreeParkingTime_watchMovie_6() {
+    fun calculateFreeParkingTime_watchMovie_underSecondMoneyPoint() {
         Assert.assertEquals(
             FIRST_FREE_TIME + WATCH_MOVIE_FREE_TIME,
             viewModel.calculateFreeParkingMinute(SECOND_MONEY_POINT - 1, true)
@@ -124,7 +124,7 @@ class ExerciseSixViewModelTest {
     }
 
     @Test
-    fun calculateFreeParkingTime_watchMovie_7() {
+    fun calculateFreeParkingTime_watchMovie_secondMoneyPoint() {
         Assert.assertEquals(
             SECOND_FREE_TIME + WATCH_MOVIE_FREE_TIME,
             viewModel.calculateFreeParkingMinute(SECOND_MONEY_POINT, true)
@@ -132,7 +132,7 @@ class ExerciseSixViewModelTest {
     }
 
     @Test
-    fun calculateFreeParkingTime_watchMovie_8() {
+    fun calculateFreeParkingTime_watchMovie_aboveSecondMoneyPoint() {
         Assert.assertEquals(
             SECOND_FREE_TIME + WATCH_MOVIE_FREE_TIME,
             viewModel.calculateFreeParkingMinute(SECOND_MONEY_POINT + 1, true)
