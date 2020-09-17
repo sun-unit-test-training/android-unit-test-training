@@ -1,5 +1,6 @@
 package com.sun.training.ut
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.sun.training.ut.data.Constants
 import com.sun.training.ut.data.Constants.BADMINTON_FEE_1200
 import com.sun.training.ut.data.Constants.BADMINTON_FEE_1400
@@ -7,12 +8,30 @@ import com.sun.training.ut.data.Constants.BADMINTON_FEE_1600
 import com.sun.training.ut.data.Constants.BASE_BADMINTON_FEE
 import com.sun.training.ut.data.Constants.DayOfWeek
 import com.sun.training.ut.data.model.No8Member
-import com.sun.training.ut.exercise.eight.calculateBadmintonFee
-import com.sun.training.ut.exercise.eight.validateMemberAge
+import com.sun.training.ut.ui.exercise_eight.ExerciseEightViewModel
 import org.junit.Assert.assertEquals
+import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.TestRule
+import org.junit.runner.RunWith
+import org.mockito.MockitoAnnotations
+import org.mockito.junit.MockitoJUnitRunner
 
+@RunWith(MockitoJUnitRunner::class)
 class ExerciseEightTest {
+
+    @get:Rule
+    var rule: TestRule = InstantTaskExecutorRule()
+
+    private lateinit var viewModel: ExerciseEightViewModel
+
+    @Before
+    @Throws(Exception::class)
+    fun setUp() {
+        MockitoAnnotations.initMocks(this)
+        viewModel = ExerciseEightViewModel()
+    }
 
     /**
      * Age: < 0
@@ -21,7 +40,7 @@ class ExerciseEightTest {
     @Test
     fun validateMemberAge_IncorrectAge_LesserThanMin_ReturnFalse() {
         val inputMember = No8Member(age = -1)
-        assertEquals(false, validateMemberAge(inputMember))
+        assertEquals(false, viewModel.validateMemberAge(inputMember))
     }
 
     /**
@@ -31,7 +50,7 @@ class ExerciseEightTest {
     @Test
     fun validateMemberAge_IncorrectAge_GreaterThanMax_ReturnFalse() {
         val inputMember = No8Member(age = 150)
-        assertEquals(false, validateMemberAge(inputMember))
+        assertEquals(false, viewModel.validateMemberAge(inputMember))
     }
 
     /**
@@ -41,7 +60,7 @@ class ExerciseEightTest {
     @Test
     fun validateMemberAge_CorrectAge_ReturnTrue() {
         val inputMember = No8Member(age = 23)
-        assertEquals(true, validateMemberAge(inputMember))
+        assertEquals(true, viewModel.validateMemberAge(inputMember))
     }
 
     /**
@@ -53,7 +72,7 @@ class ExerciseEightTest {
     fun calculateBadmintonFee_NormalMember_NotTuesday_NotFriday_Return1800() {
         val inputMember = No8Member(age = 25, gender = Constants.Gender.MALE)
         assertEquals(BASE_BADMINTON_FEE,
-            calculateBadmintonFee(inputMember, DayOfWeek.WEDNESDAY))
+            viewModel.calculateBadmintonFee(inputMember, DayOfWeek.WEDNESDAY))
     }
 
     /**
@@ -66,7 +85,7 @@ class ExerciseEightTest {
         val inputMember = No8Member(age = 25, gender = Constants.Gender.MALE)
         assertEquals(
             BADMINTON_FEE_1200,
-            calculateBadmintonFee(inputMember, DayOfWeek.TUESDAY))
+            viewModel.calculateBadmintonFee(inputMember, DayOfWeek.TUESDAY))
     }
 
     /**
@@ -79,7 +98,7 @@ class ExerciseEightTest {
         val inputMember = No8Member(age = 25, gender = Constants.Gender.FEMALE)
         assertEquals(
             BADMINTON_FEE_1400,
-            calculateBadmintonFee(inputMember, DayOfWeek.FRIDAY))
+            viewModel.calculateBadmintonFee(inputMember, DayOfWeek.FRIDAY))
     }
 
     /**
@@ -92,7 +111,7 @@ class ExerciseEightTest {
         val inputMember = No8Member(age = 25, gender = Constants.Gender.MALE)
         assertEquals(
             BASE_BADMINTON_FEE,
-            calculateBadmintonFee(inputMember, DayOfWeek.FRIDAY))
+            viewModel.calculateBadmintonFee(inputMember, DayOfWeek.FRIDAY))
     }
 
     /**
@@ -105,7 +124,7 @@ class ExerciseEightTest {
         val inputMember = No8Member(age = 12, gender = Constants.Gender.MALE)
         assertEquals(
             BASE_BADMINTON_FEE / 2,
-            calculateBadmintonFee(inputMember, DayOfWeek.WEDNESDAY))
+            viewModel.calculateBadmintonFee(inputMember, DayOfWeek.WEDNESDAY))
     }
 
     /**
@@ -117,7 +136,7 @@ class ExerciseEightTest {
     fun calculateBadmintonFee_ChildrenMember_Tuesday_Return1200() {
         val inputMember = No8Member(age = 12, gender = Constants.Gender.MALE)
         assertEquals(BADMINTON_FEE_1200,
-            calculateBadmintonFee(inputMember, DayOfWeek.TUESDAY))
+            viewModel.calculateBadmintonFee(inputMember, DayOfWeek.TUESDAY))
     }
 
     /**
@@ -129,7 +148,7 @@ class ExerciseEightTest {
     fun calculateBadmintonFee_ChildrenMember_Friday_Return900() {
         val inputMember = No8Member(age = 12, gender = Constants.Gender.FEMALE)
         assertEquals(BASE_BADMINTON_FEE / 2,
-            calculateBadmintonFee(inputMember, DayOfWeek.FRIDAY))
+            viewModel.calculateBadmintonFee(inputMember, DayOfWeek.FRIDAY))
     }
 
     /**
@@ -142,7 +161,7 @@ class ExerciseEightTest {
         val inputMember = No8Member(age = 72, gender = Constants.Gender.MALE)
         assertEquals(
             BADMINTON_FEE_1600,
-            calculateBadmintonFee(inputMember, DayOfWeek.WEDNESDAY))
+            viewModel.calculateBadmintonFee(inputMember, DayOfWeek.WEDNESDAY))
     }
 
     /**
@@ -154,7 +173,7 @@ class ExerciseEightTest {
     fun calculateBadmintonFee_OldMember_Tuesday_Return1200() {
         val inputMember = No8Member(age = 72, gender = Constants.Gender.MALE)
         assertEquals(BADMINTON_FEE_1200,
-            calculateBadmintonFee(inputMember, DayOfWeek.TUESDAY))
+            viewModel.calculateBadmintonFee(inputMember, DayOfWeek.TUESDAY))
     }
 
     /**
@@ -166,7 +185,7 @@ class ExerciseEightTest {
     fun calculateBadmintonFee_Female_OldMember_Friday_Return1400() {
         val inputMember = No8Member(age = 72, gender = Constants.Gender.FEMALE)
         assertEquals(BADMINTON_FEE_1400,
-            calculateBadmintonFee(inputMember, DayOfWeek.FRIDAY))
+            viewModel.calculateBadmintonFee(inputMember, DayOfWeek.FRIDAY))
     }
 
     /**
@@ -178,6 +197,6 @@ class ExerciseEightTest {
     fun calculateBadmintonFee_Male_OldMember_Friday_Return1600() {
         val inputMember = No8Member(age = 72, gender = Constants.Gender.MALE)
         assertEquals(BADMINTON_FEE_1600,
-            calculateBadmintonFee(inputMember, DayOfWeek.FRIDAY))
+            viewModel.calculateBadmintonFee(inputMember, DayOfWeek.FRIDAY))
     }
 }

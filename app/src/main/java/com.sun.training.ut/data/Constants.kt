@@ -6,6 +6,8 @@ object Constants {
     const val BADMINTON_FEE_1200: Int = 1200
     const val BADMINTON_FEE_1400: Int = 1400
     const val BADMINTON_FEE_1600: Int = 1600
+    const val BADMINTON_MIN_AGE: Int = 0
+    const val BADMINTON_MAX_AGE: Int = 120
 
     enum class Gender(val type: Int) {
         MALE(1),
