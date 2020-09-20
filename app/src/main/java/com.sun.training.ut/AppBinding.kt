@@ -13,7 +13,6 @@ object AppBinding  {
     @BindingAdapter("price")
     @JvmStatic
     fun price(tv: TextView, price: Int) {
-        val formatter = DecimalFormat("#,###")
-        tv.text = formatter.format(price)
+        tv.text = price.formatNumberPrice()
     }
 }
