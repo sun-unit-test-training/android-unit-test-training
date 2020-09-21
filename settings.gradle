@@ -1,2 +1,2 @@
-//rootProject.name='TrainingUnitTest'
 include ':app'
+include ':exercise_ten'
