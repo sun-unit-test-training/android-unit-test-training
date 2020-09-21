@@ -13,7 +13,6 @@ import com.sun.training.ut.ui.base.BaseActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
-import kotlin.random.Random
 
 class ExerciseTenActivity : BaseActivity<ActivityExerciseTenBinding, ExerciseTenViewModel>() {
     override val viewModel by viewModel<ExerciseTenViewModel>()
@@ -71,8 +70,6 @@ class ExerciseTenActivity : BaseActivity<ActivityExerciseTenBinding, ExerciseTen
     }
 
     private fun setupUI() {
-        viewBinding.price.setText(Random.nextDouble(3000.0, 15000.0).toInt().toString())
-
         ArrayAdapter.createFromResource(
             this,
             R.array.member,

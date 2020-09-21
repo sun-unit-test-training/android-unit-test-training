@@ -13,4 +13,4 @@ fun createUserTypeBlackClass(): User =
     User(userId = 3, userName = "Anonymous", classType = MemberClassType.BLACK_CLASS)
 
 fun createUserTypeUnknown(): User =
-    User(userId = 3, userName = "Anonymous", classType = MemberClassType.UNKNOWN_CLASS)
+    User(userId = 4, userName = "Anonymous", classType = MemberClassType.UNKNOWN_CLASS)

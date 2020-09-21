@@ -343,7 +343,6 @@ class ExerciseTenViewModelUnitTest {
         val userSilver = createUserTypeSilverClass()
         val paymentAmount = Random.nextDouble(Double.MAX_VALUE)
 
-
         val observer = mock<Observer<Invoice>>()
         tenViewModel.invoice.observeForever(observer)
         tenViewModel.user.value = userSilver
@@ -365,7 +364,6 @@ class ExerciseTenViewModelUnitTest {
     fun checkInvoice_withUserGold_andPaymentAny_willReturnInformation() {
         val userSilver = createUserTypeGoldClass()
         val paymentAmount = Random.nextDouble(Double.MAX_VALUE)
-
 
         val observer = mock<Observer<Invoice>>()
         tenViewModel.invoice.observeForever(observer)
@@ -389,7 +387,6 @@ class ExerciseTenViewModelUnitTest {
         val userSilver = createUserTypeBlackClass()
         val paymentAmount = Random.nextDouble(Double.MAX_VALUE)
 
-
         val observer = mock<Observer<Invoice>>()
         tenViewModel.invoice.observeForever(observer)
         tenViewModel.user.value = userSilver
@@ -411,7 +408,6 @@ class ExerciseTenViewModelUnitTest {
     fun checkInvoice_withUserAnonymous_andPaymentAny_willReturnInformation() {
         val userSilver = createUserTypeUnknown()
         val paymentAmount = Random.nextDouble(Double.MAX_VALUE)
-
 
         val observer = mock<Observer<Invoice>>()
         tenViewModel.invoice.observeForever(observer)

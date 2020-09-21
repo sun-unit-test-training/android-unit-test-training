@@ -25,13 +25,14 @@ android {
 
         debug {
             minifyEnabled false
-            testCoverageEnabled = true
-            debuggable = true
+            testCoverageEnabled true
+            debuggable true
         }
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding true
+        dataBinding true
     }
 
     flavorDimensions "default"
