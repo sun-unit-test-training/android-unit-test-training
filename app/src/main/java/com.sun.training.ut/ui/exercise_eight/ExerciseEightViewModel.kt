@@ -1,19 +1,20 @@
 package com.sun.training.ut.ui.exercise_eight
 
 import androidx.lifecycle.MutableLiveData
-import com.sun.training.ut.data.Constants
+import com.sun.training.ut.data.Constant
 import com.sun.training.ut.data.model.No8Member
 import com.sun.training.ut.ui.base.BaseViewModel
 
 class ExerciseEightViewModel : BaseViewModel() {
 
-    var member: No8Member? = null
-        set(value) {
-            field = value
+    var member = object : MutableLiveData<No8Member>() {
+        override fun setValue(value: No8Member?) {
+            super.setValue(value)
             calculateBadmintonFee()
         }
+    }
 
-    var dayOfWeek: Constants.DayOfWeek? = null
+    var dayOfWeek: Constant.DayOfWeek? = null
         set(value) {
             field = value
             calculateBadmintonFee()
@@ -22,41 +23,61 @@ class ExerciseEightViewModel : BaseViewModel() {
     var fee = MutableLiveData<String>()
 
     fun validateMemberAge(member: No8Member?): Boolean {
-        return (member?.age in Constants.BADMINTON_MIN_AGE..Constants.BADMINTON_MAX_AGE)
+        return (member?.age in Constant.BADMINTON_MIN_AGE..Constant.BADMINTON_MAX_AGE)
     }
 
-    fun calculateBadmintonFee(member: No8Member?, dayOfWeek: Constants.DayOfWeek?): Int {
+    fun calculateBadmintonFee(member: No8Member?, dayOfWeek: Constant.DayOfWeek?): Int {
         return when (dayOfWeek) {
-            Constants.DayOfWeek.TUESDAY -> return Constants.BADMINTON_FEE_1200
-            Constants.DayOfWeek.FRIDAY -> {
+            Constant.DayOfWeek.TUESDAY -> return Constant.BADMINTON_FEE_1200
+            Constant.DayOfWeek.FRIDAY -> {
                 when {
-                    (member?.age in 0..13) -> Constants.BASE_BADMINTON_FEE / 2
+                    (member?.age in 0..13) -> Constant.BASE_BADMINTON_FEE / 2
                     else -> {
-                        if (member?.gender == Constants.Gender.FEMALE)
-                            Constants.BADMINTON_FEE_1400
+                        if (member?.gender == Constant.Gender.FEMALE)
+                            Constant.BADMINTON_FEE_1400
                         else {
                             if (member?.age in 66..120)
-                                Constants.BADMINTON_FEE_1600
+                                Constant.BADMINTON_FEE_1600
                             else
-                                Constants.BASE_BADMINTON_FEE
+                                Constant.BASE_BADMINTON_FEE
                         }
                     }
                 }
             }
             else -> {
                 when {
-                    member?.age in 66..120 -> Constants.BADMINTON_FEE_1600
-                    member?.age in 0..13 -> Constants.BASE_BADMINTON_FEE / 2
-                    else -> Constants.BASE_BADMINTON_FEE
+                    member?.age in 66..120 -> Constant.BADMINTON_FEE_1600
+                    member?.age in 0..13 -> Constant.BASE_BADMINTON_FEE / 2
+                    else -> Constant.BASE_BADMINTON_FEE
                 }
             }
         }
     }
 
     fun calculateBadmintonFee() {
-        if (!validateMemberAge(member = member) || member == null || dayOfWeek == null)
+        if (!validateMemberAge(member = member.value) || member.value == null || dayOfWeek == null)
             return
 
-        fee.value = calculateBadmintonFee(member = member, dayOfWeek = dayOfWeek).toString()
+        fee.value = calculateBadmintonFee(member = member.value, dayOfWeek = dayOfWeek).toString()
+    }
+
+    fun genderChangedMale(isChecked: Boolean) {
+        if (isChecked)
+            member.value = No8Member(
+                age = member.value?.age ?: 0, gender = Constant.Gender.MALE
+            )
+    }
+
+    fun genderChangedFemale(isChecked: Boolean) {
+        if (isChecked)
+            member.value = No8Member(
+                age = member.value?.age ?: 0, gender = Constant.Gender.FEMALE
+            )
+    }
+
+    fun ageChanged(newVal: Int) {
+        member.value = No8Member(
+            age = newVal, gender = member.value?.gender ?: Constant.Gender.MALE
+        )
     }
 }

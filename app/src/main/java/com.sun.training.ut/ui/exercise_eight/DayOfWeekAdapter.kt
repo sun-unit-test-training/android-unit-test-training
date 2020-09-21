@@ -1,6 +1,7 @@
 package com.sun.training.ut.ui.exercise_eight
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -9,13 +10,18 @@ import com.sun.training.ut.R
 import com.sun.training.ut.databinding.ItemDayOfWeekBinding
 import com.sun.training.ut.ui.base.BaseViewHolder
 
-class DayOfWeekAdapter(private val clickCallback: ((String?, Int) -> Unit)?,
-                       private val layoutManager: RecyclerView.LayoutManager) : RecyclerView.Adapter<BaseViewHolder<ViewDataBinding>>() {
+class DayOfWeekAdapter(
+    private val clickCallback: ((String?, Int) -> Unit)?,
+    private val layoutManager: RecyclerView.LayoutManager
+) : RecyclerView.Adapter<BaseViewHolder<ViewDataBinding>>() {
 
     var listItem: ArrayList<String>? = null
     var currentItem: Int = -1
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<ViewDataBinding> {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): BaseViewHolder<ViewDataBinding> {
         return BaseViewHolder(createBinding(parent))
     }
 
@@ -26,7 +32,7 @@ class DayOfWeekAdapter(private val clickCallback: ((String?, Int) -> Unit)?,
     override fun onBindViewHolder(holder: BaseViewHolder<ViewDataBinding>, position: Int) {
         val binding = holder.binding as ItemDayOfWeekBinding
         binding.item = listItem?.getOrNull(position)
-        binding.root.setOnClickListener {
+        binding.clickListener = View.OnClickListener {
             if (position != currentItem) {
                 selectItem(position)
             }
@@ -37,8 +43,10 @@ class DayOfWeekAdapter(private val clickCallback: ((String?, Int) -> Unit)?,
     fun createBinding(parent: ViewGroup): ViewDataBinding {
         val inflater = LayoutInflater.from(parent.context)
         val binding: ViewDataBinding
-        binding = DataBindingUtil.inflate<ItemDayOfWeekBinding>(inflater,
-            R.layout.item_day_of_week, parent, false)
+        binding = DataBindingUtil.inflate<ItemDayOfWeekBinding>(
+            inflater,
+            R.layout.item_day_of_week, parent, false
+        )
         return binding
     }
 

@@ -7,9 +7,9 @@ import android.widget.NumberPicker
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sun.training.ut.BR
 import com.sun.training.ut.R
-import com.sun.training.ut.data.Constants
-import com.sun.training.ut.data.Constants.BADMINTON_MAX_AGE
-import com.sun.training.ut.data.Constants.BADMINTON_MIN_AGE
+import com.sun.training.ut.data.Constant
+import com.sun.training.ut.data.Constant.BADMINTON_MAX_AGE
+import com.sun.training.ut.data.Constant.BADMINTON_MIN_AGE
 import com.sun.training.ut.data.model.No8Member
 import com.sun.training.ut.databinding.ActivityExerciseEightBinding
 import com.sun.training.ut.ui.base.BaseActivity
@@ -31,7 +31,7 @@ class ExerciseEightActivity : BaseActivity<ActivityExerciseEightBinding, Exercis
 
         layoutManager = GridLayoutManager(this, 3)
         val adapter = DayOfWeekAdapter({ day, position ->
-            viewModel.dayOfWeek = Constants.DayOfWeek.values()[position]
+            viewModel.dayOfWeek = Constant.DayOfWeek.values()[position]
         }, layoutManager as GridLayoutManager)
         viewBinding.recyclerView.apply {
             this.adapter = adapter
@@ -51,22 +51,9 @@ class ExerciseEightActivity : BaseActivity<ActivityExerciseEightBinding, Exercis
         adapter.notifyDataSetChanged()
         adapter.selectItem(0)
 
-        viewBinding.radioGender.setOnCheckedChangeListener { group, checkedId ->
-            viewModel.member = No8Member(
-                age = viewBinding.pickerAge.value, gender = if (viewBinding.radioFemale.isChecked)
-                    Constants.Gender.FEMALE else Constants.Gender.MALE
-            )
-        }
-
         viewBinding.pickerAge.apply {
             minValue = BADMINTON_MIN_AGE
             maxValue = BADMINTON_MAX_AGE
-            setOnValueChangedListener { picker, oldVal, newVal ->
-                viewModel.member = No8Member(
-                    age = newVal, gender = if (viewBinding.radioFemale.isChecked)
-                        Constants.Gender.FEMALE else Constants.Gender.MALE
-                )
-            }
             value = 25
 
             // NOTE: workaround for a bug that rendered the selected value wrong until user scrolled, see also: https://stackoverflow.com/q/27343772/3451975
@@ -80,9 +67,9 @@ class ExerciseEightActivity : BaseActivity<ActivityExerciseEightBinding, Exercis
             }
 
             // Because setting default value not invoke OnValueChangedListener
-            viewModel.member = No8Member(
+            viewModel.member.value = No8Member(
                 age = value, gender = if (viewBinding.radioFemale.isChecked)
-                    Constants.Gender.FEMALE else Constants.Gender.MALE
+                    Constant.Gender.FEMALE else Constant.Gender.MALE
             )
         }
     }

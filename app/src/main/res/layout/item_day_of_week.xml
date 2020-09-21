@@ -6,6 +6,10 @@
         <variable
             name="item"
             type="String" />
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <TextView
@@ -13,6 +17,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_day_of_week_selector"
         android:gravity="center"
+        android:onClick="@{ clickListener }"
         android:paddingTop="@dimen/dp_4"
         android:paddingBottom="@dimen/dp_4"
         android:text="@{ item }"
