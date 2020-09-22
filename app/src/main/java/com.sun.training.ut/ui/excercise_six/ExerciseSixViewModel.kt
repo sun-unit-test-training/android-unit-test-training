@@ -1,5 +1,6 @@
 package com.sun.training.ut.ui.excercise_six
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.MutableLiveData
 import com.sun.training.ut.ui.base.BaseViewModel
 
@@ -44,6 +45,7 @@ class ExerciseSixViewModel : BaseViewModel() {
      * @param watchMovie flag detect watch movie or not
      * @return free parking time in minute
      */
+    @VisibleForTesting
     fun calculateFreeParkingMinute(totalMoney: Int, watchMovie: Boolean): Int {
         val freeTimeByTotalMoney = when {
             totalMoney < FIRST_MONEY_POINT -> 0
