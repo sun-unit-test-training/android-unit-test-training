@@ -23,6 +23,8 @@
         <activity android:name=".ui.excercise_six.ExerciseSixActivity"/>
         <activity android:name=".ui.exercise_seven.ExerciseSevenActivity"/>
         <activity android:name=".ui.exercise_nine.ExerciseNineActivity" />
+
+        <activity android:name=".ui.exercise_eight.ExerciseEightActivity"/>
     </application>
 
 </manifest>

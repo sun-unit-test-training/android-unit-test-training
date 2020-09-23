@@ -5,4 +5,57 @@ object Constant {
     const val REGULAR_PRICE = 490
     const val VOUCHER_PRICE = 100
     const val TIME_PRICE = 290
+
+    const val BASE_BADMINTON_FEE: Int = 1800
+    const val BADMINTON_FEE_1200: Int = 1200
+    const val BADMINTON_FEE_1400: Int = 1400
+    const val BADMINTON_FEE_1600: Int = 1600
+    const val BADMINTON_MIN_AGE: Int = 0
+    const val BADMINTON_MAX_AGE: Int = 120
+
+    enum class Gender(val type: Int) {
+        MALE(1),
+        FEMALE(2)
+    }
+
+    /**
+     * Because min api 19
+     */
+    enum class DayOfWeek {
+        /**
+         * The singleton instance for the day-of-week of Monday.
+         * This has the numeric value of `1`.
+         */
+        MONDAY,
+        /**
+         * The singleton instance for the day-of-week of Tuesday.
+         * This has the numeric value of `2`.
+         */
+        TUESDAY,
+        /**
+         * The singleton instance for the day-of-week of Wednesday.
+         * This has the numeric value of `3`.
+         */
+        WEDNESDAY,
+        /**
+         * The singleton instance for the day-of-week of Thursday.
+         * This has the numeric value of `4`.
+         */
+        THURSDAY,
+        /**
+         * The singleton instance for the day-of-week of Friday.
+         * This has the numeric value of `5`.
+         */
+        FRIDAY,
+        /**
+         * The singleton instance for the day-of-week of Saturday.
+         * This has the numeric value of `6`.
+         */
+        SATURDAY,
+        /**
+         * The singleton instance for the day-of-week of Sunday.
+         * This has the numeric value of `7`.
+         */
+        SUNDAY;
+    }
 }
