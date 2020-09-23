@@ -268,10 +268,10 @@ class ExerciseTenViewModelUnitTest {
 
     @Test
     fun discountCalculate_withUserAnonymous_andPaymentEquals3K_willReceive_0() {
-        val userBlack = createUserTypeUnknown()
+        val userAnonymous = createUserTypeUnknown()
         val paymentAmount = 3000.0
 
-        tenViewModel.user.value = userBlack
+        tenViewModel.user.value = userAnonymous
         tenViewModel.subTotal.value = paymentAmount.toString()
 
         assertEquals(tenViewModel.discountCalculation(paymentAmount), paymentAmount * 0.0)
@@ -279,10 +279,10 @@ class ExerciseTenViewModelUnitTest {
 
     @Test
     fun discountCalculate_withUserAnonymous_andPaymentEquals5K_willReceive_0() {
-        val userBlack = createUserTypeUnknown()
+        val userAnonymous = createUserTypeUnknown()
         val paymentAmount = 5000.0
 
-        tenViewModel.user.value = userBlack
+        tenViewModel.user.value = userAnonymous
         tenViewModel.subTotal.value = paymentAmount.toString()
 
         assertEquals(tenViewModel.discountCalculation(paymentAmount), paymentAmount * 0.0)
@@ -290,10 +290,10 @@ class ExerciseTenViewModelUnitTest {
 
     @Test
     fun discountCalculate_withUserAnonymous_andPaymentEquals10K_willReceive_0() {
-        val userBlack = createUserTypeUnknown()
+        val userAnonymous = createUserTypeUnknown()
         val paymentAmount = 10000.0
 
-        tenViewModel.user.value = userBlack
+        tenViewModel.user.value = userAnonymous
         tenViewModel.subTotal.value = paymentAmount.toString()
 
         assertEquals(tenViewModel.discountCalculation(paymentAmount), paymentAmount * 0.0)
@@ -362,12 +362,12 @@ class ExerciseTenViewModelUnitTest {
 
     @Test
     fun checkInvoice_withUserGold_andPaymentAny_willReturnInformation() {
-        val userSilver = createUserTypeGoldClass()
+        val userGold = createUserTypeGoldClass()
         val paymentAmount = Random.nextDouble(Double.MAX_VALUE)
 
         val observer = mock<Observer<Invoice>>()
         tenViewModel.invoice.observeForever(observer)
-        tenViewModel.user.value = userSilver
+        tenViewModel.user.value = userGold
         tenViewModel.subTotal.value = paymentAmount.toString()
 
         val currentDiscount = tenViewModel.discountCalculation(paymentAmount)
@@ -384,12 +384,12 @@ class ExerciseTenViewModelUnitTest {
 
     @Test
     fun checkInvoice_withUserBlack_andPaymentAny_willReturnInformation() {
-        val userSilver = createUserTypeBlackClass()
+        val userBlack = createUserTypeBlackClass()
         val paymentAmount = Random.nextDouble(Double.MAX_VALUE)
 
         val observer = mock<Observer<Invoice>>()
         tenViewModel.invoice.observeForever(observer)
-        tenViewModel.user.value = userSilver
+        tenViewModel.user.value = userBlack
         tenViewModel.subTotal.value = paymentAmount.toString()
 
         val currentDiscount = tenViewModel.discountCalculation(paymentAmount)
@@ -406,12 +406,12 @@ class ExerciseTenViewModelUnitTest {
 
     @Test
     fun checkInvoice_withUserAnonymous_andPaymentAny_willReturnInformation() {
-        val userSilver = createUserTypeUnknown()
+        val userAnonymous = createUserTypeUnknown()
         val paymentAmount = Random.nextDouble(Double.MAX_VALUE)
 
         val observer = mock<Observer<Invoice>>()
         tenViewModel.invoice.observeForever(observer)
-        tenViewModel.user.value = userSilver
+        tenViewModel.user.value = userAnonymous
         tenViewModel.subTotal.value = paymentAmount.toString()
 
         val currentDiscount = tenViewModel.discountCalculation(paymentAmount)
