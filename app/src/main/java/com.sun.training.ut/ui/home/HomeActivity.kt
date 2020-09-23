@@ -14,6 +14,7 @@ import com.sun.training.ut.ui.exercise_nine.ExerciseNineActivity
 import com.sun.training.ut.ui.exercise_one.ExerciseOneActivity
 import com.sun.training.ut.ui.exercise_seven.ExerciseSevenActivity
 import com.sun.training.ut.ui.exercise_three.ExerciseThreeActivity
+import com.sun.training.ut.ui.exercise_two.ExerciseTwoActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
@@ -35,8 +36,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeIte
             submitList(
                 listOf(
                     Exercise("Ex1: Bia hơi Keangnam", ExerciseOneActivity::class.java),
-                    Exercise("Ex2: ATM của ngân hàng Việt Nam", this@HomeActivity.javaClass),
+                    Exercise("Ex2: ATM của ngân hàng Việt Nam", ExerciseTwoActivity::class.java),
                     Exercise("Ex3: Quần áo nam trên Hoàn Kiếm", ExerciseThreeActivity::class.java),
+                    Exercise("Ex3: Quần áo nam trên Hoàn Kiếm", this@HomeActivity.javaClass),
                     Exercise("Ex4: Mr.A đang làm 1 app về calendar", this@HomeActivity.javaClass),
                     Exercise("Ex5: 8 pieces pizza", ExerciseFiveActivity::class.java),
                     Exercise("Ex6: Trung tâm mua sắm Tây Hồ", ExerciseSixActivity::class.java),
