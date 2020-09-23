@@ -13,6 +13,13 @@
     <string name="total_beer">Nhập số cốc bia</string>
     <string name="name_beer">Số cốc bia đã uống:</string>
 
+    <!--    exercise six-->
+    <string name="exercise_six_total_money">Tổng tiền mua sắm</string>
+    <string name="exercise_six_total_money_hint">Nhập tổng tiền</string>
+    <string name="exercise_six_watch_movie">Xem phim</string>
+    <string name="exercise_six_free_parking_minute">Thời gian gửi xe miễn phí</string>
+    <string name="exercise_six_condition">①：Trường hợp tổng số tiền mua sắm từ 2,000円/yên trở lên, miễn phí phí gửi xe trong 60 phút.\n②：Trường hợp tổng số tiền mua sắm từ 5,000円/yên trở lên, miễn phí gửi xe trong 120 phút. \n③：Nếu khách hàng có xem phim, miễn phí gửi xe thêm 180 phút, cộng bổ sung vào cùng với tổng số tiền mua sắm.</string>
+
     <!--Text use for exercise 9-->
     <string name="magic_wand">Đũa phép</string>
     <string name="master">Quân sư</string>
