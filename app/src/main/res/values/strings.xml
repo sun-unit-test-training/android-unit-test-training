@@ -44,4 +44,12 @@
     <string name="female">Female</string>
     <string name="day_of_week">Day of Week:</string>
     <string name="fee">Fee:</string>
+
+    <!--Text use for exercise 5-->
+    <string name="condition_5">
+        ●Điều kiện tiên quyết：\n
+①：Trường hợp tổng hoá đơn trên 1,500円/yên thì được miễn phí khoai tây chiên.\n
+②：Trường hợp đến lấy tại cửa hàng thì được miễn phí pizza thứ 2.\n
+③：Trường hợp giao đến nhà và có coupon giảm giá thì được giảm 20% tổng hoá đơn.\n
+    </string>
 </resources>

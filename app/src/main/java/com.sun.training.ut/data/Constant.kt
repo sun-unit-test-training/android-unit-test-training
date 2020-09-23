@@ -27,35 +27,56 @@ object Constant {
          * This has the numeric value of `1`.
          */
         MONDAY,
+
         /**
          * The singleton instance for the day-of-week of Tuesday.
          * This has the numeric value of `2`.
          */
         TUESDAY,
+
         /**
          * The singleton instance for the day-of-week of Wednesday.
          * This has the numeric value of `3`.
          */
         WEDNESDAY,
+
         /**
          * The singleton instance for the day-of-week of Thursday.
          * This has the numeric value of `4`.
          */
         THURSDAY,
+
         /**
          * The singleton instance for the day-of-week of Friday.
          * This has the numeric value of `5`.
          */
         FRIDAY,
+
         /**
          * The singleton instance for the day-of-week of Saturday.
          * This has the numeric value of `6`.
          */
         SATURDAY,
+
         /**
          * The singleton instance for the day-of-week of Sunday.
          * This has the numeric value of `7`.
          */
         SUNDAY;
+    }
+
+    //Exercise 5
+    const val DEFAULT_PRICE = 1500
+
+    enum class TypeDelivery {
+        DELIVERY,
+        RECEIVE_AT_STORE
+    }
+
+    enum class Coupon(val coupon: String) {
+        POTATO_PROMOTION("Potato promotion\n"),
+        OFF_20("Sale off bill with 20%\n"),
+        PIZZA_SECOND_FREE("Free pizza second\n"),
+        REGULAR_FEE("Regular fee\n")
     }
 }
