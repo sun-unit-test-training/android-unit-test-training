@@ -3,6 +3,7 @@ package com.sun.training.ut.di
 import com.sun.training.ut.ui.exercise_nine.ExerciseNineViewModel
 import com.sun.training.ut.ui.excercise_six.ExerciseSixViewModel
 import com.sun.training.ut.ui.exercise_eight.ExerciseEightViewModel
+import com.sun.training.ut.ui.exercise_four.ExerciseFourViewModel
 import com.sun.training.ut.ui.exercise_one.ExerciseOneViewModel
 import com.sun.training.ut.ui.exercise_seven.ExerciseSevenViewModel
 import com.sun.training.ut.ui.exercise_five.ExerciseFiveViewModel
@@ -21,10 +22,11 @@ val viewModelModule = module {
     viewModel { ExerciseOneViewModel() }
     viewModel { ExerciseTwoViewModel() }
     viewModel { ExerciseThreeViewModel() }
+    viewModel { ExerciseFourViewModel() }
     viewModel { ExerciseFiveViewModel() }
     viewModel { ExerciseSixViewModel() }
     viewModel { ExerciseSevenViewModel() }
-    viewModel { ExerciseNineViewModel() }
     viewModel { ExerciseEightViewModel() }
+    viewModel { ExerciseNineViewModel() }
 }
 

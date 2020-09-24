@@ -22,6 +22,7 @@
         <activity android:name=".ui.exercise_one.ExerciseOneActivity"/>
         <activity android:name=".ui.exercise_two.ExerciseTwoActivity" />
         <activity android:name=".ui.exercise_three.ExerciseThreeActivity"/>
+        <activity android:name=".ui.exercise_four.ExerciseFourActivity"/>
         <activity android:name=".ui.exercise_five.ExerciseFiveActivity" />
         <activity android:name=".ui.excercise_six.ExerciseSixActivity"/>
         <activity android:name=".ui.exercise_seven.ExerciseSevenActivity"/>
