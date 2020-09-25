@@ -89,4 +89,6 @@
         ※Ngày thường：Thứ 2～Thứ 6\n
         Hãy tham khảo các điều kiện bên trên và viết ra các unit test case tối thiểu nhất bạn có thể nghĩ được trong trường hợp bạn đang implement chương trình đó.</string>
 
+    <string name="title_exercise_ten">Exercise Ten</string>
+    <string name="title_exercise_10">Exercise 10</string>
 </resources>

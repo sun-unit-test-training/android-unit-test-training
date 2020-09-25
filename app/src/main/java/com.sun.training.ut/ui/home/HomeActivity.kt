@@ -22,6 +22,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
  * Sample activity
  * Show list post got from URL_END_POINT = https://jsonplaceholder.typicode.com/
  */
+@Suppress("UNCHECKED_CAST")
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeItemClickListener {
     override val viewModel: HomeViewModel by viewModel()
     override val bindingVariable = BR.viewModel
@@ -51,13 +52,27 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeIte
                         ExerciseEightActivity::class.java
                     ),
                     Exercise("Ex9: Roll Playng Game Hanoi quest", ExerciseNineActivity::class.java),
-                    Exercise("Ex10: Nhà hàng Nam Từ Liêm", this@HomeActivity.javaClass)
+                    Exercise("Ex10: Nhà hàng Nam Từ Liêm", getClazzTen())
                 )
             )
         }
     }
 
     override fun onHomeItemClicked(item: Exercise<*>) {
-        startActivity(Intent(this, item.clz))
+        try {
+            startActivity(Intent(this, item.clz))
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun getClazzTen(): Class<BaseActivity<*, *>> {
+        val clzz = Class.forName(EXERCISE_TEN_CLASSNAME)
+        return clzz as? Class<BaseActivity<*, *>> ?: (this::class.java as Class<BaseActivity<*, *>>)
+    }
+
+    companion object {
+        private const val PACKAGE_NAME = "com.sun.training.ut"
+        private const val EXERCISE_TEN_CLASSNAME = "$PACKAGE_NAME.exercise_ten.ui.ExerciseTenActivity"
     }
 }
