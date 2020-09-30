@@ -10,13 +10,10 @@ class ExerciseOneViewModel : BaseViewModel() {
     private var isVoucher: Boolean = false
 
     var numberBeer = 0
-    var priceLiveData: MutableLiveData<Int> = MutableLiveData()
+    val priceLiveData: MutableLiveData<Int> = MutableLiveData()
 
     fun calculatePrice() {
-        calculatePrice(Beer(isVoucher, isTimeCoupon, numberBeer))
-    }
-
-    fun calculatePrice(beer: Beer) : Int {
+        val beer = Beer(isVoucher, isTimeCoupon, numberBeer)
         val priceOfBeer = when {
             beer.isVoucher -> {
                 Constant.VOUCHER_PRICE
@@ -28,7 +25,6 @@ class ExerciseOneViewModel : BaseViewModel() {
         }
         val total = priceOfBeer * beer.numberBeer
         priceLiveData.postValue(total)
-        return total
     }
 
     fun onTimeCouponChecked(isChecked: Boolean) {

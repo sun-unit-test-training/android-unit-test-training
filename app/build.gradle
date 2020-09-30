@@ -90,6 +90,12 @@ android {
     dynamicFeatures = [':exercise_ten']
 }
 
+tasks.withType(Test) {
+//    // Whether or not classes without source location should be instrumented
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
