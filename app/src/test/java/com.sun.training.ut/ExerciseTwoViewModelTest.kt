@@ -11,6 +11,7 @@ import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
+import kotlin.jvm.Throws
 
 @RunWith(MockitoJUnitRunner::class)
 class ExerciseTwoViewModelTest {
@@ -44,23 +45,29 @@ class ExerciseTwoViewModelTest {
 
     @Test
     fun validatePrice_vip_dayOfWeek_timeIn_return0() {
-        val input = Customer(hour = 8, minute = 45, isVip = true, dayOfMonth = 1, monthOfYear = 9)
-        val result = viewModel.calculateFee(customer = input)
-        assertEquals(0, result)
+        viewModel.onTimeChanged(8, 45)
+        viewModel.onDateChanged(9, 1)
+        viewModel.onVipChecked(true)
+        viewModel.calculateFee()
+        assertEquals(0, viewModel.feeLiveData.value)
     }
 
     @Test
     fun validatePrice_vip_dayOfWeek_timeOutLower_return0() {
-        val input = Customer(hour = 8, minute = 44, isVip = true, dayOfMonth = 29, monthOfYear = 4)
-        val result = viewModel.calculateFee(customer = input)
-        assertEquals(0, result)
+        viewModel.onTimeChanged(8, 44)
+        viewModel.onDateChanged(29, 4)
+        viewModel.onVipChecked(true)
+        viewModel.calculateFee()
+        assertEquals(0, viewModel.feeLiveData.value)
     }
 
     @Test
     fun validatePrice_vip_dayOfWeek_timeOutUpper_return0() {
-        val input = Customer(hour = 18, minute = 0, isVip = true, dayOfMonth = 29, monthOfYear = 4)
-        val result = viewModel.calculateFee(customer = input)
-        assertEquals(0, result)
+        viewModel.onTimeChanged(18, 0)
+        viewModel.onDateChanged(29, 4)
+        viewModel.onVipChecked(true)
+        viewModel.calculateFee()
+        assertEquals(0, viewModel.feeLiveData.value)
     }
 
     /**
@@ -71,23 +78,29 @@ class ExerciseTwoViewModelTest {
 
     @Test
     fun validatePrice_vip_holiday_timeIn_return0() {
-        val input = Customer(hour = 8, minute = 45, isVip = true, dayOfMonth = 1, monthOfYear = 5)
-        val result = viewModel.calculateFee(customer = input)
-        assertEquals(0, result)
+        viewModel.onTimeChanged(8, 45)
+        viewModel.onDateChanged(1, 5)
+        viewModel.onVipChecked(true)
+        viewModel.calculateFee()
+        assertEquals(0, viewModel.feeLiveData.value)
     }
 
     @Test
     fun validatePrice_vip_holiday_timeOutUpper_return0() {
-        val input = Customer(hour = 18, minute = 0, isVip = true, dayOfMonth = 30, monthOfYear = 4)
-        val result = viewModel.calculateFee(customer = input)
-        assertEquals(0, result)
+        viewModel.onTimeChanged(18, 0)
+        viewModel.onDateChanged(30, 4)
+        viewModel.onVipChecked(true)
+        viewModel.calculateFee()
+        assertEquals(0, viewModel.feeLiveData.value)
     }
 
     @Test
     fun validatePrice_vip_holiday_timeOutLower_return0() {
-        val input = Customer(hour = 8, minute = 44, isVip = true, dayOfMonth = 30, monthOfYear = 4)
-        val result = viewModel.calculateFee(customer = input)
-        assertEquals(0, result)
+        viewModel.onTimeChanged(8, 44)
+        viewModel.onDateChanged(30, 4)
+        viewModel.onVipChecked(true)
+        viewModel.calculateFee()
+        assertEquals(0, viewModel.feeLiveData.value)
     }
 
     /**
@@ -98,24 +111,29 @@ class ExerciseTwoViewModelTest {
 
     @Test
     fun validatePrice_noVip_dayOfWeek_timeIn_return0() {
-        val input =
-            Customer(hour = 17, minute = 59, isVip = false, dayOfMonth = 30, monthOfYear = 2)
-        val result = viewModel.calculateFee(customer = input)
-        assertEquals(0, result)
+        viewModel.onTimeChanged(17, 59)
+        viewModel.onDateChanged(30, 2)
+        viewModel.onVipChecked(false)
+        viewModel.calculateFee()
+        assertEquals(0, viewModel.feeLiveData.value)
     }
 
     @Test
     fun validatePrice_noVip_dayOfWeek_timeOutLower_return110() {
-        val input = Customer(hour = 8, minute = 44, isVip = false, dayOfMonth = 30, monthOfYear = 5)
-        val result = viewModel.calculateFee(customer = input)
-        assertEquals(110, result)
+        viewModel.onTimeChanged(8, 44)
+        viewModel.onDateChanged(30, 5)
+        viewModel.onVipChecked(false)
+        viewModel.calculateFee()
+        assertEquals(110, viewModel.feeLiveData.value)
     }
 
     @Test
     fun validatePrice_noVip_dayOfWeek_timeOutUpper_return110() {
-        val input = Customer(hour = 18, minute = 0, isVip = false, dayOfMonth = 30, monthOfYear = 5)
-        val result = viewModel.calculateFee(customer = input)
-        assertEquals(110, result)
+        viewModel.onTimeChanged(18, 0)
+        viewModel.onDateChanged(30, 5)
+        viewModel.onVipChecked(false)
+        viewModel.calculateFee()
+        assertEquals(110, viewModel.feeLiveData.value)
     }
 
 
@@ -127,22 +145,28 @@ class ExerciseTwoViewModelTest {
 
     @Test
     fun validatePrice_noVip_holiday_timeIn_return110() {
-        val input = Customer(hour = 8, minute = 45, isVip = false, dayOfMonth = 1, monthOfYear = 1)
-        val result = viewModel.calculateFee(customer = input)
-        assertEquals(110, result)
+        viewModel.onTimeChanged(8, 45)
+        viewModel.onDateChanged(1, 1)
+        viewModel.onVipChecked(false)
+        viewModel.calculateFee()
+        assertEquals(110, viewModel.feeLiveData.value)
     }
 
     @Test
     fun validatePrice_noVip_holiday_timeOutLower_return110() {
-        val input = Customer(hour = 8, minute = 44, isVip = false, dayOfMonth = 30, monthOfYear = 4)
-        val result = viewModel.calculateFee(customer = input)
-        assertEquals(110, result)
+        viewModel.onTimeChanged(8, 44)
+        viewModel.onDateChanged(30, 4)
+        viewModel.onVipChecked(false)
+        viewModel.calculateFee()
+        assertEquals(110, viewModel.feeLiveData.value)
     }
 
     @Test
     fun validatePrice_noVip_holiday_timeOutUpper_return110() {
-        val input = Customer(hour = 18, minute = 0, isVip = false, dayOfMonth = 30, monthOfYear = 4)
-        val result = viewModel.calculateFee(customer = input)
-        assertEquals(110, result)
+        viewModel.onTimeChanged(18, 0)
+        viewModel.onDateChanged(30, 4)
+        viewModel.onVipChecked(false)
+        viewModel.calculateFee()
+        assertEquals(110, viewModel.feeLiveData.value)
     }
 }

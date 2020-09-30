@@ -12,6 +12,7 @@ import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
+import kotlin.jvm.Throws
 
 
 @RunWith(MockitoJUnitRunner::class)
@@ -40,29 +41,37 @@ class ExerciseOneViewModelTest {
 
     @Test
     fun validatePrice_withVoucher_noTimeDiscount_numberBeerIs5_returnPriceIs500() {
-        val input = Beer(isVoucher = true, isTimeCoupon = false, numberBeer = 5)
-        val result = viewModel.calculatePrice(input)
-        assertEquals(input.numberBeer * Constant.VOUCHER_PRICE, result)
+        viewModel.onVoucherChecked(true)
+        viewModel.onTimeCouponChecked(false)
+        viewModel.numberBeer = 5
+        viewModel.calculatePrice()
+        assertEquals(viewModel.numberBeer * Constant.VOUCHER_PRICE, viewModel.priceLiveData.value)
     }
 
     @Test
     fun validatePrice_withVoucher_withTimeDiscount_numberBeerIs5_returnPriceIs500() {
-        val input = Beer(isVoucher = true, isTimeCoupon = true, numberBeer = 5)
-        val result = viewModel.calculatePrice(beer = input)
-        assertEquals(input.numberBeer * Constant.VOUCHER_PRICE, result)
+        viewModel.onVoucherChecked(true)
+        viewModel.onTimeCouponChecked(true)
+        viewModel.numberBeer = 5
+        viewModel.calculatePrice()
+        assertEquals(viewModel.numberBeer * Constant.VOUCHER_PRICE, viewModel.priceLiveData.value)
     }
 
     @Test
     fun validatePrice_noVoucher_onTimeDiscount_numberBeerIs10_returnPriceIs2900() {
-        val input = Beer(isVoucher = false, isTimeCoupon = true, numberBeer = 10)
-        val result = viewModel.calculatePrice(beer = input)
-        assertEquals(input.numberBeer * Constant.TIME_PRICE, result)
+        viewModel.onVoucherChecked(false)
+        viewModel.onTimeCouponChecked(true)
+        viewModel.numberBeer = 10
+        viewModel.calculatePrice()
+        assertEquals(viewModel.numberBeer * Constant.TIME_PRICE, viewModel.priceLiveData.value)
     }
 
     @Test
     fun validatePrice_noVoucher_NoTimeDiscount_numberBeerIs7_returnPriceIs3430() {
-        val input = Beer(isVoucher = false, isTimeCoupon = false, numberBeer = 7)
-        val result = viewModel.calculatePrice(beer = input)
-        assertEquals(input.numberBeer * Constant.REGULAR_PRICE, result)
+        viewModel.onVoucherChecked(false)
+        viewModel.onTimeCouponChecked(false)
+        viewModel.numberBeer = 7
+        viewModel.calculatePrice()
+        assertEquals(viewModel.numberBeer * Constant.REGULAR_PRICE, viewModel.priceLiveData.value)
     }
 }
