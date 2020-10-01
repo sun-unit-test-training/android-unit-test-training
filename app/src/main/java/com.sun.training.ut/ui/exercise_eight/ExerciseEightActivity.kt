@@ -30,7 +30,7 @@ class ExerciseEightActivity : BaseActivity<ActivityExerciseEightBinding, Exercis
         viewBinding.lifecycleOwner = this
 
         layoutManager = GridLayoutManager(this, 3)
-        val adapter = DayOfWeekAdapter({ day, position ->
+        val adapter = DayOfWeekAdapter({ _, position ->
             viewModel.dayOfWeek = Constant.DayOfWeek.values()[position]
         }, layoutManager as GridLayoutManager)
         viewBinding.recyclerView.apply {

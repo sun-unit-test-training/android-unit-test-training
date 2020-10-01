@@ -17,17 +17,5 @@ class ExerciseNineActivity : BaseActivity<ActivityExerciseNineBinding, ExerciseN
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding.lifecycleOwner = this
-        viewModel.resultBeatBoss.observe(this, Observer { result ->
-            val textResult = if (!result.findRoom) {
-                resources.getString(R.string.can_not_find_room)
-            } else if (result.inputRoom != true) {
-                resources.getString(R.string.can_not_go_room)
-            } else if (result.beatBoss != true) {
-                resources.getString(R.string.can_not_beat_boss)
-            } else {
-                resources.getString(R.string.beat_boss)
-            }
-            viewModel.updateTextResultBeatBoss(textResult)
-        })
     }
 }

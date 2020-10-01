@@ -11,7 +11,7 @@ import java.time.LocalDate
 import java.time.temporal.ChronoField
 
 class ExerciseFourViewModel : BaseViewModel() {
-    var colorLiveData: MutableLiveData<String> = MutableLiveData()
+    val colorLiveData: MutableLiveData<String> = MutableLiveData()
     private var holidays = arrayOf("2/9", "1/1", "30/4", "1/5")
 
     private var dayOfMonth: Int = 0
@@ -19,21 +19,7 @@ class ExerciseFourViewModel : BaseViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun calculateColor() {
-        calculateColor(calendar = Calendar(dayOfMonth = dayOfMonth, monthOfYear = monthOfYear))
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun checkDay(dayOfMonth: Int, monthOfYear: Int): Constant.Color {
-        val day = LocalDate.of(2020, monthOfYear, dayOfMonth)
-        return when (DayOfWeek.of(day.get(ChronoField.DAY_OF_WEEK))) {
-            DayOfWeek.SATURDAY -> Constant.Color.BLUE
-            DayOfWeek.SUNDAY -> Constant.Color.RED
-            else -> Constant.Color.BLACK
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun calculateColor(calendar: Calendar) {
+        val calendar = Calendar(dayOfMonth = dayOfMonth, monthOfYear = monthOfYear)
         val color = if (checkHoliday(
                 dayOfMonth = calendar.dayOfMonth,
                 monthOfYear = calendar.monthOfYear
@@ -46,6 +32,16 @@ class ExerciseFourViewModel : BaseViewModel() {
                 monthOfYear = calendar.monthOfYear
             )
         colorLiveData.postValue(color.name)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun checkDay(dayOfMonth: Int, monthOfYear: Int): Constant.Color {
+        val day = LocalDate.of(2020, monthOfYear, dayOfMonth)
+        return when (DayOfWeek.of(day.get(ChronoField.DAY_OF_WEEK))) {
+            DayOfWeek.SATURDAY -> Constant.Color.BLUE
+            DayOfWeek.SUNDAY -> Constant.Color.RED
+            else -> Constant.Color.BLACK
+        }
     }
 
     fun onDateChanged(monthOfYear: Int, dayOfMonth: Int) {

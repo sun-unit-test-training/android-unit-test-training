@@ -2,7 +2,6 @@ package com.sun.training.ut
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.sun.training.ut.data.Constant
-import com.sun.training.ut.data.model.Shopping
 import com.sun.training.ut.ui.exercise_three.ExerciseThreeViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -67,119 +66,112 @@ class ExerciseThreeViewModelTest {
 
     @Test
     fun validateDiscount_7Items_whiteShirt_tie_return12() {
-        val input = Shopping(
-            numberOfItems = Constant.DEFAULT_ITEM_HAVE_DISCOUNT,
-            isTie = true,
-            isWhiteShirt = true
-        )
-        val result = viewModel.calculateDiscount(shopping = input)
-        assertEquals(result, Constant.DISCOUNT_12)
+        viewModel.numberOfItems = Constant.DEFAULT_ITEM_HAVE_DISCOUNT
+        viewModel.onChangedTie(true)
+        viewModel.onChangedShirt(true)
+        viewModel.calculate()
+        assertEquals(Constant.DISCOUNT_12, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateDiscount_7Items_NoWhiteShirt_tie_return7() {
-        val input = Shopping(
-            numberOfItems = Constant.DEFAULT_ITEM_HAVE_DISCOUNT,
-            isTie = true,
-            isWhiteShirt = false
-        )
-        val result = viewModel.calculateDiscount(shopping = input)
-        assertEquals(result, Constant.DISCOUNT_7)
+        viewModel.numberOfItems = Constant.DEFAULT_ITEM_HAVE_DISCOUNT
+        viewModel.onChangedTie(true)
+        viewModel.onChangedShirt(false)
+        viewModel.calculate()
+        assertEquals(Constant.DISCOUNT_7, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateDiscount_7Items_whiteShirt_noTie_return7() {
-        val input = Shopping(
-            numberOfItems = Constant.DEFAULT_ITEM_HAVE_DISCOUNT,
-            isTie = false,
-            isWhiteShirt = true
-        )
-        val result = viewModel.calculateDiscount(shopping = input)
-        assertEquals(result, Constant.DISCOUNT_7)
+        viewModel.numberOfItems = Constant.DEFAULT_ITEM_HAVE_DISCOUNT
+        viewModel.onChangedTie(false)
+        viewModel.onChangedShirt(true)
+        viewModel.calculate()
+        assertEquals(Constant.DISCOUNT_7, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateDiscount_7Items_NoWhiteShirt_noTie_return7() {
-        val input = Shopping(
-            numberOfItems = Constant.DEFAULT_ITEM_HAVE_DISCOUNT,
-            isTie = false,
-            isWhiteShirt = false
-        )
-        val result = viewModel.calculateDiscount(shopping = input)
-        assertEquals(result, Constant.DISCOUNT_7)
+        viewModel.numberOfItems = Constant.DEFAULT_ITEM_HAVE_DISCOUNT
+        viewModel.onChangedTie(false)
+        viewModel.onChangedShirt(false)
+        viewModel.calculate()
+        assertEquals(Constant.DISCOUNT_7, viewModel.discountLiveData.value)
     }
 
     //>= 7 items
 
     @Test
     fun validateDiscount_Upper7Items_whiteShirt_tie_return12() {
-        val input = Shopping(
-            numberOfItems = 1000,
-            isTie = true,
-            isWhiteShirt = true
-        )
-        val result = viewModel.calculateDiscount(shopping = input)
-        assertEquals(result, Constant.DISCOUNT_12)
+        viewModel.numberOfItems = 1000
+        viewModel.onChangedTie(true)
+        viewModel.onChangedShirt(true)
+        viewModel.calculate()
+        assertEquals(Constant.DISCOUNT_12, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateDiscount_Upper7Items_NoWhiteShirt_tie_return7() {
-        val input = Shopping(
-            numberOfItems = 999,
-            isTie = true,
-            isWhiteShirt = false
-        )
-        val result = viewModel.calculateDiscount(shopping = input)
-        assertEquals(result, Constant.DISCOUNT_7)
+        viewModel.numberOfItems = 999
+        viewModel.onChangedTie(true)
+        viewModel.onChangedShirt(false)
+        viewModel.calculate()
+        assertEquals(Constant.DISCOUNT_7, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateDiscount_Upper7Items_whiteShirt_noTie_return7() {
-        val input = Shopping(
-            numberOfItems = 99,
-            isTie = false,
-            isWhiteShirt = true
-        )
-        val result = viewModel.calculateDiscount(shopping = input)
-        assertEquals(result, Constant.DISCOUNT_7)
+        viewModel.numberOfItems = 99
+        viewModel.onChangedTie(false)
+        viewModel.onChangedShirt(true)
+        viewModel.calculate()
+        assertEquals(Constant.DISCOUNT_7, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateDiscount_Upper7Items_NoWhiteShirt_noTie_return7() {
-        val input = Shopping(
-            numberOfItems = 8,
-            isTie = false,
-            isWhiteShirt = false
-        )
-        val result = viewModel.calculateDiscount(shopping = input)
-        assertEquals(result, Constant.DISCOUNT_7)
+        viewModel.numberOfItems = 8
+        viewModel.onChangedTie(false)
+        viewModel.onChangedShirt(false)
+        viewModel.calculate()
+        assertEquals(Constant.DISCOUNT_7, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateDiscount_LesserThan7Items_whiteShirt_tie_return5() {
-        val input = Shopping(numberOfItems = 6, isTie = true, isWhiteShirt = true)
-        val result = viewModel.calculateDiscount(shopping = input)
-        assertEquals(result, 5)
+        viewModel.numberOfItems = 6
+        viewModel.onChangedTie(true)
+        viewModel.onChangedShirt(true)
+        viewModel.calculate()
+        assertEquals(5, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateDiscount_LesserThan7Items_NoWhiteShirt_tie_return0() {
-        val input = Shopping(numberOfItems = 1, isTie = true, isWhiteShirt = false)
-        val result = viewModel.calculateDiscount(shopping = input)
-        assertEquals(result, 0)
+        viewModel.numberOfItems = 1
+        viewModel.onChangedTie(true)
+        viewModel.onChangedShirt(false)
+        viewModel.calculate()
+        assertEquals(0, viewModel.discountLiveData.value)
+
     }
 
     @Test
     fun validateDiscount_LesserThan7Items_WhiteShirt_NoTie_return0() {
-        val input = Shopping(numberOfItems = -1, isTie = false, isWhiteShirt = true)
-        val result = viewModel.calculateDiscount(shopping = input)
-        assertEquals(result, 0)
+        viewModel.numberOfItems = -1
+        viewModel.onChangedTie(false)
+        viewModel.onChangedShirt(true)
+        viewModel.calculate()
+        assertEquals(0, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateDiscount_LesserThan7Items_NoWhiteShirt_NoTie_return0() {
-        val input = Shopping(numberOfItems = 0, isTie = false, isWhiteShirt = false)
-        val result = viewModel.calculateDiscount(shopping = input)
-        assertEquals(result, 0)
+        viewModel.numberOfItems = 0
+        viewModel.onChangedTie(false)
+        viewModel.onChangedShirt(false)
+        viewModel.calculate()
+        assertEquals(0, viewModel.discountLiveData.value)
     }
 }

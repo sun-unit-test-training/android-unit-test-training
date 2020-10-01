@@ -4,28 +4,30 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.sun.training.ut.data.Constant
 import com.sun.training.ut.data.model.Calendar
 import com.sun.training.ut.ui.exercise_four.ExerciseFourViewModel
-import io.mockk.spyk
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith
-import org.powermock.core.classloader.annotations.PrepareForTest
-import org.powermock.modules.junit4.PowerMockRunner
+import org.mockito.MockitoAnnotations
+import org.mockito.junit.MockitoJUnitRunner
 import org.powermock.reflect.Whitebox
 
-@RunWith(PowerMockRunner::class)
-@PrepareForTest(value = [ExerciseFourViewModel::class])
-class ExerciseFourViewModelTest : BaseTestViewModel<ExerciseFourViewModel>() {
+@RunWith(MockitoJUnitRunner::class)
+class ExerciseFourViewModelTest() {
 
     @Rule
     @JvmField
     var rule: TestRule = InstantTaskExecutorRule()
 
+    private lateinit var viewModel: ExerciseFourViewModel
+
     @Before
-    override fun setUp() {
-        viewModel = spyk(ExerciseFourViewModel(), recordPrivateCalls = true)
+    @Throws(Exception::class)
+    fun setUp() {
+        MockitoAnnotations.initMocks(this)
+        viewModel = ExerciseFourViewModel()
     }
 
     /**
@@ -52,9 +54,8 @@ class ExerciseFourViewModelTest : BaseTestViewModel<ExerciseFourViewModel>() {
      */
     @Test
     fun validateColor_SaturdayWithHoliday_returnRed() {
-        val dataInput =
-            Calendar(dayOfMonth = 1, monthOfYear = 1)
-        Whitebox.invokeMethod<Any>(viewModel, "calculateColor", dataInput)
+        viewModel.onDateChanged(0, 1)
+        viewModel.calculateColor()
         assertEquals(Constant.Color.RED.name, viewModel.colorLiveData.value)
     }
 
@@ -64,9 +65,8 @@ class ExerciseFourViewModelTest : BaseTestViewModel<ExerciseFourViewModel>() {
      */
     @Test
     fun validateColor_SundayWithHoliday_returnRed() {
-        val dataInput =
-            Calendar(dayOfMonth = 30, monthOfYear = 4)
-        Whitebox.invokeMethod<Any>(viewModel, "calculateColor", dataInput)
+        viewModel.onDateChanged(3, 30)
+        viewModel.calculateColor()
         assertEquals(Constant.Color.RED.name, viewModel.colorLiveData.value)
     }
 
@@ -76,9 +76,8 @@ class ExerciseFourViewModelTest : BaseTestViewModel<ExerciseFourViewModel>() {
      */
     @Test
     fun validateColor_DayOfWeekWithHoliday_returnRed() {
-        val dataInput =
-            Calendar(dayOfMonth = 1, monthOfYear = 5)
-        Whitebox.invokeMethod<Any>(viewModel, "calculateColor", dataInput)
+        viewModel.onDateChanged(3, 5)
+        viewModel.calculateColor()
         assertEquals(Constant.Color.RED.name, viewModel.colorLiveData.value)
     }
 
@@ -88,9 +87,8 @@ class ExerciseFourViewModelTest : BaseTestViewModel<ExerciseFourViewModel>() {
      */
     @Test
     fun validateColor_SaturdayWithNoHoliday_returnBlue() {
-        val dataInput =
-            Calendar(dayOfMonth = 19, monthOfYear = 9)
-        Whitebox.invokeMethod<Any>(viewModel, "calculateColor", dataInput)
+        viewModel.onDateChanged(8, 19)
+        viewModel.calculateColor()
         assertEquals(Constant.Color.BLUE.name, viewModel.colorLiveData.value)
     }
 
@@ -100,9 +98,8 @@ class ExerciseFourViewModelTest : BaseTestViewModel<ExerciseFourViewModel>() {
      */
     @Test
     fun validateColor_SundayWithNoHoliday_returnRed() {
-        val dataInput =
-            Calendar(dayOfMonth = 20, monthOfYear = 9)
-        Whitebox.invokeMethod<Any>(viewModel, "calculateColor", dataInput)
+        viewModel.onDateChanged(8, 20)
+        viewModel.calculateColor()
         assertEquals(Constant.Color.RED.name, viewModel.colorLiveData.value)
     }
 
@@ -112,9 +109,8 @@ class ExerciseFourViewModelTest : BaseTestViewModel<ExerciseFourViewModel>() {
      */
     @Test
     fun validateColor_DayOfWeekWithOutHoliday_returnBlack() {
-        val dataInput =
-            Calendar(dayOfMonth = 30, monthOfYear = 1)
-        Whitebox.invokeMethod<Any>(viewModel, "calculateColor", dataInput)
+        viewModel.onDateChanged(0, 30)
+        viewModel.calculateColor()
         assertEquals(Constant.Color.BLACK.name, viewModel.colorLiveData.value)
     }
 }

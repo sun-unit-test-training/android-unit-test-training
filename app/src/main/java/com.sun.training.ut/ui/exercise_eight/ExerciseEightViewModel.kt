@@ -7,7 +7,7 @@ import com.sun.training.ut.ui.base.BaseViewModel
 
 class ExerciseEightViewModel : BaseViewModel() {
 
-    var member = object : MutableLiveData<No8Member>() {
+    val member = object : MutableLiveData<No8Member>() {
         override fun setValue(value: No8Member?) {
             super.setValue(value)
             calculateBadmintonFee()
@@ -20,23 +20,26 @@ class ExerciseEightViewModel : BaseViewModel() {
             calculateBadmintonFee()
         }
 
-    var fee = MutableLiveData<String>()
+    val fee = MutableLiveData<Int>()
 
     fun validateMemberAge(member: No8Member?): Boolean {
         return (member?.age in Constant.BADMINTON_MIN_AGE..Constant.BADMINTON_MAX_AGE)
     }
 
-    fun calculateBadmintonFee(member: No8Member?, dayOfWeek: Constant.DayOfWeek?): Int {
-        return when (dayOfWeek) {
-            Constant.DayOfWeek.TUESDAY -> return Constant.BADMINTON_FEE_1200
+    fun calculateBadmintonFee() {
+        if (!validateMemberAge(member = member.value) || member.value == null || dayOfWeek == null)
+            return
+
+        fee.value = when (dayOfWeek) {
+            Constant.DayOfWeek.TUESDAY -> Constant.BADMINTON_FEE_1200
             Constant.DayOfWeek.FRIDAY -> {
                 when {
-                    (member?.age in 0..13) -> Constant.BASE_BADMINTON_FEE / 2
+                    (member.value?.age in 0..13) -> Constant.BASE_BADMINTON_FEE / 2
                     else -> {
-                        if (member?.gender == Constant.Gender.FEMALE)
+                        if (member.value?.gender == Constant.Gender.FEMALE)
                             Constant.BADMINTON_FEE_1400
                         else {
-                            if (member?.age in 66..120)
+                            if (member.value?.age in 66..120)
                                 Constant.BADMINTON_FEE_1600
                             else
                                 Constant.BASE_BADMINTON_FEE
@@ -46,19 +49,12 @@ class ExerciseEightViewModel : BaseViewModel() {
             }
             else -> {
                 when {
-                    member?.age in 66..120 -> Constant.BADMINTON_FEE_1600
-                    member?.age in 0..13 -> Constant.BASE_BADMINTON_FEE / 2
+                    member.value?.age in 66..120 -> Constant.BADMINTON_FEE_1600
+                    member.value?.age in 0..13 -> Constant.BASE_BADMINTON_FEE / 2
                     else -> Constant.BASE_BADMINTON_FEE
                 }
             }
         }
-    }
-
-    fun calculateBadmintonFee() {
-        if (!validateMemberAge(member = member.value) || member.value == null || dayOfWeek == null)
-            return
-
-        fee.value = calculateBadmintonFee(member = member.value, dayOfWeek = dayOfWeek).toString()
     }
 
     fun genderChangedMale(isChecked: Boolean) {

@@ -12,30 +12,23 @@ class ExerciseFiveViewModel : BaseViewModel() {
     private var isVoucher: Boolean = false
 
     var totalPrice = 0
-    var discountLiveData: MutableLiveData<String> = MutableLiveData()
+    val discountLiveData: MutableLiveData<String> = MutableLiveData()
 
     fun calculateCouponWithPizza() {
         val typeDelivery =
             if (isDelivery) Constant.TypeDelivery.DELIVERY else Constant.TypeDelivery.RECEIVE_AT_STORE
-        val discount = calculateCouponWithPizza(
-            Pizza(
-                bill = totalPrice,
-                typeDelivery = typeDelivery,
-                isCoupon = isVoucher
-            )
+        val pizza = Pizza(
+            bill = totalPrice,
+            typeDelivery = typeDelivery,
+            isCoupon = isVoucher
         )
-        discountLiveData.postValue(discount)
-    }
-
-    @VisibleForTesting
-    fun calculateCouponWithPizza(pizza: Pizza): String {
-        var coupon = ""
+        var discount = ""
 
         if (pizza.bill > DEFAULT_PRICE) {
-            coupon += Constant.Coupon.POTATO_PROMOTION.coupon
+            discount += Constant.Coupon.POTATO_PROMOTION.coupon
         }
 
-        coupon += if (pizza.typeDelivery == Constant.TypeDelivery.DELIVERY) {
+        discount += if (pizza.typeDelivery == Constant.TypeDelivery.DELIVERY) {
             if (pizza.isCoupon) {
                 Constant.Coupon.OFF_20.coupon
             } else {
@@ -44,8 +37,7 @@ class ExerciseFiveViewModel : BaseViewModel() {
         } else {
             Constant.Coupon.PIZZA_SECOND_FREE.coupon
         }
-
-        return coupon
+        discountLiveData.postValue(discount)
     }
 
     fun onChangedDelivery(isChecked: Boolean) {

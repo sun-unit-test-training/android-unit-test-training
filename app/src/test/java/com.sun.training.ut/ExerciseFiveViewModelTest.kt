@@ -41,96 +41,87 @@ class ExerciseFiveViewModelTest {
 
     @Test
     fun validateCoupon_Bill_Equal1500_Delivery_coupon_return20OFF() {
-        val input =
-            Pizza(bill = 1500, typeDelivery = Constant.TypeDelivery.DELIVERY, isCoupon = true)
-        val validate = viewModel.calculateCouponWithPizza(pizza = input)
-        val expected = Constant.Coupon.OFF_20.coupon
-        assertEquals(expected, validate)
+        viewModel.totalPrice = 1500
+        viewModel.onChangedDelivery(true)
+        viewModel.onChangedVoucher(true)
+        viewModel.calculateCouponWithPizza()
+        assertEquals(Constant.Coupon.OFF_20.coupon, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateCoupon_Bill_lesser1500_Delivery_coupon_return20OFF() {
-        val input =
-            Pizza(bill = 1499, typeDelivery = Constant.TypeDelivery.DELIVERY, isCoupon = true)
-        val validate = viewModel.calculateCouponWithPizza(pizza = input)
-        val expected = Constant.Coupon.OFF_20.coupon
-        assertEquals(expected, validate)
+        viewModel.totalPrice = 1499
+        viewModel.onChangedDelivery(true)
+        viewModel.onChangedVoucher(true)
+        viewModel.calculateCouponWithPizza()
+        assertEquals(Constant.Coupon.OFF_20.coupon, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateCoupon_Bill_Equal1500_Delivery_no_coupon_returnRegularFee() {
-        val input =
-            Pizza(bill = 1500, typeDelivery = Constant.TypeDelivery.DELIVERY, isCoupon = false)
-        val validate = viewModel.calculateCouponWithPizza(pizza = input)
-        val expected = Constant.Coupon.REGULAR_FEE.coupon
-        assertEquals(expected, validate)
+        viewModel.totalPrice = 1500
+        viewModel.onChangedDelivery(true)
+        viewModel.onChangedVoucher(false)
+        viewModel.calculateCouponWithPizza()
+        assertEquals(Constant.Coupon.REGULAR_FEE.coupon, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateCoupon_Bill_lesser1500_Delivery_no_coupon_returnRegularFee() {
-        val input =
-            Pizza(bill = 1499, typeDelivery = Constant.TypeDelivery.DELIVERY, isCoupon = false)
-        val validate = viewModel.calculateCouponWithPizza(pizza = input)
-        val expected = Constant.Coupon.REGULAR_FEE.coupon
-        assertEquals(expected, validate)
+        viewModel.totalPrice = 1499
+        viewModel.onChangedDelivery(true)
+        viewModel.onChangedVoucher(false)
+        viewModel.calculateCouponWithPizza()
+        assertEquals(Constant.Coupon.REGULAR_FEE.coupon, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateCoupon_Bill_lesser1500_NoDelivery_returnFreePizzaSecond() {
-        val input =
-            Pizza(
-                bill = 1499,
-                typeDelivery = Constant.TypeDelivery.RECEIVE_AT_STORE,
-                isCoupon = true
-            )
-        val validate = viewModel.calculateCouponWithPizza(pizza = input)
-        val expected = Constant.Coupon.PIZZA_SECOND_FREE.coupon
-        assertEquals(expected, validate)
+        viewModel.totalPrice = 1499
+        viewModel.onChangedDelivery(false)
+        viewModel.onChangedVoucher(true)
+        viewModel.calculateCouponWithPizza()
+        assertEquals(Constant.Coupon.PIZZA_SECOND_FREE.coupon, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateCoupon_Bill_Equal1500_NoDelivery_returnFreePizzaSecond() {
-        val input =
-            Pizza(
-                bill = 1500,
-                typeDelivery = Constant.TypeDelivery.RECEIVE_AT_STORE,
-                isCoupon = true
-            )
-        val validate = viewModel.calculateCouponWithPizza(pizza = input)
-        val expected = Constant.Coupon.PIZZA_SECOND_FREE.coupon
-        assertEquals(expected, validate)
+        viewModel.totalPrice = 1500
+        viewModel.onChangedDelivery(false)
+        viewModel.onChangedVoucher(true)
+        viewModel.calculateCouponWithPizza()
+        assertEquals(Constant.Coupon.PIZZA_SECOND_FREE.coupon, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateCoupon_Bill_BiggerThan1500_NoDelivery_returnFreePizzaSecondAndPotatoPromotion() {
-        val input =
-            Pizza(
-                bill = 1600,
-                typeDelivery = Constant.TypeDelivery.RECEIVE_AT_STORE,
-                isCoupon = true
-            )
-        val validate = viewModel.calculateCouponWithPizza(pizza = input)
+        viewModel.totalPrice = 1600
+        viewModel.onChangedDelivery(false)
+        viewModel.onChangedVoucher(true)
+        viewModel.calculateCouponWithPizza()
         val expected =
             Constant.Coupon.POTATO_PROMOTION.coupon + Constant.Coupon.PIZZA_SECOND_FREE.coupon
-        assertEquals(expected, validate)
+        assertEquals(expected, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateCoupon_Bill_BiggerThan1500_Delivery_no_coupon_returnRegularFeeAndPotatoPromotion() {
-        val input =
-            Pizza(bill = 1600, typeDelivery = Constant.TypeDelivery.DELIVERY, isCoupon = false)
-        val validate = viewModel.calculateCouponWithPizza(pizza = input)
         val expected =
             Constant.Coupon.POTATO_PROMOTION.coupon + Constant.Coupon.REGULAR_FEE.coupon
-        assertEquals(expected, validate)
+        viewModel.totalPrice = 1600
+        viewModel.onChangedDelivery(true)
+        viewModel.onChangedVoucher(false)
+        viewModel.calculateCouponWithPizza()
+        assertEquals(expected, viewModel.discountLiveData.value)
     }
 
     @Test
     fun validateCoupon_Bill_BiggerThan1500_Delivery_coupon_return20OFFAndPotatoPromotion() {
-        val input =
-            Pizza(bill = 1600, typeDelivery = Constant.TypeDelivery.DELIVERY, isCoupon = true)
-        val validate = viewModel.calculateCouponWithPizza(pizza = input)
         val expected = Constant.Coupon.POTATO_PROMOTION.coupon + Constant.Coupon.OFF_20.coupon
-        assertEquals(expected, validate)
+        viewModel.totalPrice = 1600
+        viewModel.onChangedDelivery(true)
+        viewModel.onChangedVoucher(true)
+        viewModel.calculateCouponWithPizza()
+        assertEquals(expected, viewModel.discountLiveData.value)
     }
 }

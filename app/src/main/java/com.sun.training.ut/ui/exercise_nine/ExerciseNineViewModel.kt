@@ -12,8 +12,7 @@ class ExerciseNineViewModel : BaseViewModel() {
     private var hasKey: Boolean = false
     private var hasLightSword: Boolean = false
 
-    var textResult: MutableLiveData<String> = MutableLiveData()
-    var resultBeatBoss: MutableLiveData<No9Result> = MutableLiveData()
+    val resultBeatBoss: MutableLiveData<No9Result> = MutableLiveData()
 
     /**
      * Điều kiện tiên quyết：
@@ -35,9 +34,9 @@ class ExerciseNineViewModel : BaseViewModel() {
         resultBeatBoss.postValue(result)
     }
 
-    fun checkResultExerciseNine(input: No9Input): No9Result {
+    private fun checkResultExerciseNine(input: No9Input): No9Result {
         val no9Result = No9Result(findRoom = false)
-        if (input.magicWand == true || input.master == true) {
+        if (input.magicWand || input.master) {
             no9Result.findRoom = true
             if (input.key == true) {
                 no9Result.inputRoom = true
@@ -54,7 +53,7 @@ class ExerciseNineViewModel : BaseViewModel() {
         hasMagicWand = isChecked
     }
 
-    fun onMasterhecked(isChecked: Boolean) {
+    fun onMasterChecked(isChecked: Boolean) {
         hasMaster = isChecked
     }
 
@@ -64,9 +63,5 @@ class ExerciseNineViewModel : BaseViewModel() {
 
     fun onLightSwordChecked(isChecked: Boolean) {
         hasLightSword = isChecked
-    }
-
-    fun updateTextResultBeatBoss(result: String) {
-        textResult.value = result
     }
 }
