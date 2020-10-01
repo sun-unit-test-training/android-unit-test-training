@@ -53,145 +53,188 @@ class ExerciseNineViewModelTest {
 
     @Test
     fun checkExercise9Case1_FullTool_BeatBoss() {
-        val input = No9Input(magicWand = true, master = true, key = true, lightSword = true)
+        viewModel.onMagicWandChecked(true)
+        viewModel.onMasterChecked(true)
+        viewModel.onKeyChecked(true)
+        viewModel.onLightSwordChecked(true)
         val outputExpect = No9Result(findRoom = true, inputRoom = true, beatBoss = true)
-        val no9Result = viewModel.checkResultExerciseNine(input)
+        viewModel.checkResultExerciseNine()
 
-        assertEquals(outputExpect, no9Result)
+        assertEquals(outputExpect, viewModel.resultBeatBoss.value)
     }
 
     @Test
     fun checkExercise9Case2_NoLightSword_NoBeatBoss() {
-        val input = No9Input(magicWand = true, master = true, key = true, lightSword = false)
+        viewModel.onMagicWandChecked(true)
+        viewModel.onMasterChecked(true)
+        viewModel.onKeyChecked(true)
+        viewModel.onLightSwordChecked(false)
         val outputExpect = No9Result(findRoom = true, inputRoom = true, beatBoss = null)
-        val no9Result = viewModel.checkResultExerciseNine(input)
+        viewModel.checkResultExerciseNine()
 
-        assertEquals(outputExpect, no9Result)
+        assertEquals(outputExpect, viewModel.resultBeatBoss.value)
     }
 
     @Test
     fun checkExercise9Case3_NoKey_NoInputRoom() {
-        val input = No9Input(magicWand = true, master = true, key = false)
+        viewModel.onMagicWandChecked(true)
+        viewModel.onMasterChecked(true)
+        viewModel.onKeyChecked(false)
         val outputExpect = No9Result(findRoom = true, inputRoom = null, beatBoss = null)
-        val no9Result = viewModel.checkResultExerciseNine(input)
+        viewModel.checkResultExerciseNine()
 
-        assertEquals(outputExpect, no9Result)
+        assertEquals(outputExpect, viewModel.resultBeatBoss.value)
     }
 
     @Test
     fun checkExercise9Case4_AllToolExceptMaster_BeatBoss() {
-        val input = No9Input(magicWand = true, master = false, key = true, lightSword = true)
+        viewModel.onMagicWandChecked(true)
+        viewModel.onMasterChecked(false)
+        viewModel.onKeyChecked(true)
+        viewModel.onLightSwordChecked(true)
         val outputExpect = No9Result(findRoom = true, inputRoom = true, beatBoss = true)
-        val no9Result = viewModel.checkResultExerciseNine(input)
+        viewModel.checkResultExerciseNine()
 
-        assertEquals(outputExpect, no9Result)
+        assertEquals(outputExpect, viewModel.resultBeatBoss.value)
     }
 
     @Test
     fun checkExercise9Case5_NoMasterAndLightSword_NoBeatBoss() {
-        val input = No9Input(magicWand = true, master = false, key = true, lightSword = false)
+        viewModel.onMagicWandChecked(true)
+        viewModel.onMasterChecked(false)
+        viewModel.onKeyChecked(true)
+        viewModel.onLightSwordChecked(false)
         val outputExpect = No9Result(findRoom = true, inputRoom = true, beatBoss = null)
-        val no9Result = viewModel.checkResultExerciseNine(input)
+        viewModel.checkResultExerciseNine()
 
-        assertEquals(outputExpect, no9Result)
+        assertEquals(outputExpect, viewModel.resultBeatBoss.value)
     }
 
     @Test
     fun checkExercise9Case6_NoMasterAndKey_NoInputRoom() {
-        val input = No9Input(magicWand = true, master = false, key = false)
+        viewModel.onMagicWandChecked(true)
+        viewModel.onMasterChecked(false)
+        viewModel.onKeyChecked(false)
         val outputExpect = No9Result(findRoom = true, inputRoom = null, beatBoss = null)
-        val no9Result = viewModel.checkResultExerciseNine(input)
+        viewModel.checkResultExerciseNine()
 
-        assertEquals(outputExpect, no9Result)
+        assertEquals(outputExpect, viewModel.resultBeatBoss.value)
     }
 
     @Test
     fun checkExercise9Case7_NoMagicWand_BeatBoss() {
-        val input = No9Input(magicWand = false, master = true, key = true, lightSword = true)
+        viewModel.onMagicWandChecked(false)
+        viewModel.onMasterChecked(true)
+        viewModel.onKeyChecked(true)
+        viewModel.onLightSwordChecked(true)
         val outputExpect = No9Result(findRoom = true, inputRoom = true, beatBoss = true)
-        val no9Result = viewModel.checkResultExerciseNine(input)
+        viewModel.checkResultExerciseNine()
 
-        assertEquals(outputExpect, no9Result)
+        assertEquals(outputExpect, viewModel.resultBeatBoss.value)
     }
 
     @Test
     fun checkExercise9Case8_NoMagicWandAndLightSword_NoBeatBoss() {
-        val input = No9Input(magicWand = false, master = true, key = true, lightSword = false)
+        viewModel.onMagicWandChecked(false)
+        viewModel.onMasterChecked(true)
+        viewModel.onKeyChecked(true)
+        viewModel.onLightSwordChecked(false)
         val outputExpect = No9Result(findRoom = true, inputRoom = true, beatBoss = null)
-        val no9Result = viewModel.checkResultExerciseNine(input)
+        viewModel.checkResultExerciseNine()
 
-        assertEquals(outputExpect, no9Result)
+        assertEquals(outputExpect, viewModel.resultBeatBoss.value)
     }
 
     @Test
     fun checkExercise9Case9_NoMagicWandAndKey_NoInputRoom() {
-        val input = No9Input(magicWand = false, master = true, key = false)
+        viewModel.onMagicWandChecked(false)
+        viewModel.onMasterChecked(true)
+        viewModel.onKeyChecked(false)
         val outputExpect = No9Result(findRoom = true, inputRoom = null, beatBoss = null)
-        val no9Result = viewModel.checkResultExerciseNine(input)
+        viewModel.checkResultExerciseNine()
 
-        assertEquals(outputExpect, no9Result)
+        assertEquals(outputExpect, viewModel.resultBeatBoss.value)
     }
 
     @Test
     fun checkExercise9Case10_MissAll_NoFindRoom() {
-        val input = No9Input(magicWand = false, master = false)
+        viewModel.onMagicWandChecked(false)
+        viewModel.onMasterChecked(false)
         val outputExpect = No9Result(findRoom = false, inputRoom = null, beatBoss = null)
-        val no9Result = viewModel.checkResultExerciseNine(input)
+        viewModel.checkResultExerciseNine()
 
-        assertEquals(outputExpect, no9Result)
+        assertEquals(outputExpect, viewModel.resultBeatBoss.value)
     }
 
     @Test
     fun checkExercise9Case11_NoKey_NoInputRoom() {
-        val input = No9Input(magicWand = true, master = true, key = false, lightSword = true)
+        viewModel.onMagicWandChecked(true)
+        viewModel.onMasterChecked(true)
+        viewModel.onKeyChecked(false)
+        viewModel.onLightSwordChecked(true)
         val outputExpect = No9Result(findRoom = true, inputRoom = null, beatBoss = null)
-        val no9Result = viewModel.checkResultExerciseNine(input)
+        viewModel.checkResultExerciseNine()
 
-        assertEquals(outputExpect, no9Result)
+        assertEquals(outputExpect, viewModel.resultBeatBoss.value)
     }
 
     @Test
     fun checkExercise9Case12_NoKeyAndLightSword_NoInputRoom() {
-        val input = No9Input(magicWand = true, master = true, key = false, lightSword = false)
+        viewModel.onMagicWandChecked(true)
+        viewModel.onMasterChecked(true)
+        viewModel.onKeyChecked(false)
+        viewModel.onLightSwordChecked(false)
         val outputExpect = No9Result(findRoom = true, inputRoom = null, beatBoss = null)
-        val no9Result = viewModel.checkResultExerciseNine(input)
+        viewModel.checkResultExerciseNine()
 
-        assertEquals(outputExpect, no9Result)
+        assertEquals(outputExpect, viewModel.resultBeatBoss.value)
     }
 
     @Test
     fun checkExercise9Case13_NoMasterAndKey_NoInputRoom() {
-        val input = No9Input(magicWand = true, master = false, key = false, lightSword = true)
+        viewModel.onMagicWandChecked(true)
+        viewModel.onMasterChecked(false)
+        viewModel.onKeyChecked(false)
+        viewModel.onLightSwordChecked(true)
         val outputExpect = No9Result(findRoom = true, inputRoom = null, beatBoss = null)
-        val no9Result = viewModel.checkResultExerciseNine(input)
+        viewModel.checkResultExerciseNine()
 
-        assertEquals(outputExpect, no9Result)
+        assertEquals(outputExpect, viewModel.resultBeatBoss.value)
     }
 
     @Test
     fun checkExercise9Case14_NoMasterAndKey_NoInputRoom() {
-        val input = No9Input(magicWand = true, master = false, key = false, lightSword = false)
+        viewModel.onMagicWandChecked(true)
+        viewModel.onMasterChecked(false)
+        viewModel.onKeyChecked(false)
+        viewModel.onLightSwordChecked(false)
         val outputExpect = No9Result(findRoom = true, inputRoom = null, beatBoss = null)
-        val no9Result = viewModel.checkResultExerciseNine(input)
+        viewModel.checkResultExerciseNine()
 
-        assertEquals(outputExpect, no9Result)
+        assertEquals(outputExpect, viewModel.resultBeatBoss.value)
     }
 
     @Test
     fun checkExercise9Case15_NoMagicWandAndKey_NoInputRoom() {
-        val input = No9Input(magicWand = false, master = true, key = false, lightSword = true)
+        viewModel.onMagicWandChecked(false)
+        viewModel.onMasterChecked(true)
+        viewModel.onKeyChecked(false)
+        viewModel.onLightSwordChecked(true)
         val outputExpect = No9Result(findRoom = true, inputRoom = null, beatBoss = null)
-        val no9Result = viewModel.checkResultExerciseNine(input)
+        viewModel.checkResultExerciseNine()
 
-        assertEquals(outputExpect, no9Result)
+        assertEquals(outputExpect, viewModel.resultBeatBoss.value)
     }
 
     @Test
     fun checkExercise9Case16_OnlyMaster_NoInputRoom() {
-        val input = No9Input(magicWand = false, master = true, key = false, lightSword = false)
+        viewModel.onMagicWandChecked(false)
+        viewModel.onMasterChecked(true)
+        viewModel.onKeyChecked(false)
+        viewModel.onLightSwordChecked(false)
         val outputExpect = No9Result(findRoom = true, inputRoom = null, beatBoss = null)
-        val no9Result = viewModel.checkResultExerciseNine(input)
+        viewModel.checkResultExerciseNine()
 
-        assertEquals(outputExpect, no9Result)
+        assertEquals(outputExpect, viewModel.resultBeatBoss.value)
     }
 }

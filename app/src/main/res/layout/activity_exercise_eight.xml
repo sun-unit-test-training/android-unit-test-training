@@ -128,7 +128,7 @@
             android:layout_width="@dimen/dp_60"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_40"
-            android:text="@{ viewModel.fee }"
+            android:text="@{ viewModel.fee + `` }"
             android:textColor="@color/red_1"
             android:textSize="@dimen/sp_20"
             app:layout_constraintEnd_toEndOf="parent"

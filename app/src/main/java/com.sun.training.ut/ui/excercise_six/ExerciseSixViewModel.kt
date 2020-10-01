@@ -25,35 +25,25 @@ class ExerciseSixViewModel : BaseViewModel() {
 
     private var isWatchMovie = false
 
-    val totalPurchased = MutableLiveData<String>()
-    val freeParkingInMinute = MutableLiveData<String>()
-
-    fun calculateMinute() {
-        freeParkingInMinute.value = calculateFreeParkingMinute(
-            totalMoney = totalPurchased.value?.toIntOrNull() ?: 0,
-            watchMovie = isWatchMovie
-        ).toString()
-    }
-
-    fun onWatchMovieChecked(isChecked: Boolean) {
-        isWatchMovie = isChecked
-    }
+    var totalPurchased: Int = 0
+    val freeParkingInMinute = MutableLiveData<Int>()
 
     /**
      * calculate free parking minute from total purchased money and watch movie or not
-     * @param totalMoney total purchased money
-     * @param watchMovie flag detect watch movie or not
-     * @return free parking time in minute
      */
-    @VisibleForTesting
-    fun calculateFreeParkingMinute(totalMoney: Int, watchMovie: Boolean): Int {
+
+    fun calculateMinute() {
+        val totalMoney = totalPurchased
         val freeTimeByTotalMoney = when {
             totalMoney < FIRST_MONEY_POINT -> 0
             totalMoney in FIRST_MONEY_POINT until SECOND_MONEY_POINT -> FIRST_FREE_TIME
             // SECOND_MONEY_POINT <= totalMoney
             else -> SECOND_FREE_TIME
         }
-        return if (watchMovie) freeTimeByTotalMoney + WATCH_MOVIE_FREE_TIME else freeTimeByTotalMoney
+        freeParkingInMinute.value = if (isWatchMovie) freeTimeByTotalMoney + WATCH_MOVIE_FREE_TIME else freeTimeByTotalMoney
     }
 
+    fun onWatchMovieChecked(isChecked: Boolean) {
+        isWatchMovie = isChecked
+    }
 }
