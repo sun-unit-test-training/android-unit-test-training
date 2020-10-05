@@ -11,7 +11,7 @@ class ExerciseSevenViewModel : BaseViewModel() {
     private val moneyFreeShip = 5000
 
     var money = 0
-    var feeLiveData: MutableLiveData<Int> = MutableLiveData()
+    var feeLiveData: MutableLiveData<Int> = MutableLiveData<Int>().apply { value = 0 }
     var isErrorLiveData: MutableLiveData<Boolean> =
         MutableLiveData<Boolean>().apply { value = false }
 

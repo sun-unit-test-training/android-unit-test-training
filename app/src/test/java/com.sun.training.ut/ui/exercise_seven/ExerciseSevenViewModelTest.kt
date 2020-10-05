@@ -28,7 +28,6 @@ Phí vận chuyển 500 yên	    X	-	X	-	X	-	-	X
 Phí vận chuyển 1000 yên	    -	-	-	-	-	-	X	-
  */
 @RunWith(PowerMockRunner::class)
-@PrepareForTest(value = [ExerciseSevenViewModel::class])
 class ExerciseSevenViewModelTest : BaseTestViewModel<ExerciseSevenViewModel>() {
 
     @Rule

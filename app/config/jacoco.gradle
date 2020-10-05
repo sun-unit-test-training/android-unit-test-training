@@ -65,6 +65,22 @@ project.afterEvaluate {
             ])
 
             executionData.from = files("${project.buildDir}/jacoco/${testTaskName}.exec")
+
+            executionData.setFrom(fileTree(
+                    dir: "$buildDir",
+                    include: [
+                            "jacoco/${testTaskName}.exec",
+                            'outputs/code-coverage/connected/flavors/**/*coverage.ec'
+                    ]
+            ))
+
+            doFirst {
+                files("$buildDir/tmp/kotlin-classes/${variantName}").getFiles().each { file ->
+                    if (file.name.contains('$$')) {
+                        file.renameTo(file.path.replace('$$', '$'))
+                    }
+                }
+            }
         }
     }
 }
