@@ -17,7 +17,7 @@ class ExerciseTenViewModel constructor(private val resources: Resources) : BaseV
     val user = MutableLiveData<User>()
 
     val invoice = SingleLiveData<Invoice>()
-    var subTotal = MutableLiveData<String>()
+    val subTotal = MutableLiveData<String>()
 
     init {
         user.value = User(
@@ -72,17 +72,5 @@ class ExerciseTenViewModel constructor(private val resources: Resources) : BaseV
         user.value?.let { user ->
             user.classType = memberType
         }
-    }
-
-    fun getMemberPosition(): Int {
-        val arrays = resources.getStringArray(R.array.member)
-        val currentText = when (user.value?.classType) {
-            MemberClassType.BLACK_CLASS -> resources.getString(R.string.ex_10_class_type_black)
-            MemberClassType.GOLD_CLASS -> resources.getString(R.string.ex_10_class_type_gold)
-            MemberClassType.SILVER_CLASS -> resources.getString(R.string.ex_10_class_type_silver)
-            else -> null
-        }
-
-        return currentText?.let { arrays.indexOf(it) } ?: 0
     }
 }

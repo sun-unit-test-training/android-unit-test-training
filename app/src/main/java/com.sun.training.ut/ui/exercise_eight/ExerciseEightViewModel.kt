@@ -27,41 +27,41 @@ class ExerciseEightViewModel : BaseViewModel() {
     }
 
     fun calculateBadmintonFee() {
-        if (!validateMemberAge(member = member.value) || member.value == null || dayOfWeek == null)
-            return
-
-        fee.value = when (dayOfWeek) {
-            Constant.DayOfWeek.TUESDAY -> Constant.BADMINTON_FEE_1200
-            Constant.DayOfWeek.FRIDAY -> {
-                when {
-                    (member.value?.age in 0..13) -> Constant.BASE_BADMINTON_FEE / 2
-                    else -> {
-                        if (member.value?.gender == Constant.Gender.FEMALE)
-                            Constant.BADMINTON_FEE_1400
-                        else {
-                            if (member.value?.age in 66..120)
-                                Constant.BADMINTON_FEE_1600
-                            else
-                                Constant.BASE_BADMINTON_FEE
+        if (dayOfWeek == null) return
+        val validate = validateMemberAge(member.value)
+        member.value?.takeIf { validate }?. apply {
+            fee.value = when {
+                dayOfWeek == Constant.DayOfWeek.TUESDAY -> Constant.BADMINTON_FEE_1200
+                dayOfWeek == Constant.DayOfWeek.FRIDAY -> {
+                    when {
+                        age <= 13 -> Constant.BASE_BADMINTON_FEE / 2
+                        else -> {
+                            if (gender == Constant.Gender.FEMALE)
+                                Constant.BADMINTON_FEE_1400
+                            else {
+                                if (age < 66)
+                                    Constant.BASE_BADMINTON_FEE
+                                else
+                                    Constant.BADMINTON_FEE_1600
+                            }
                         }
                     }
                 }
-            }
-            else -> {
-                when {
-                    member.value?.age in 66..120 -> Constant.BADMINTON_FEE_1600
-                    member.value?.age in 0..13 -> Constant.BASE_BADMINTON_FEE / 2
-                    else -> Constant.BASE_BADMINTON_FEE
+                else -> {
+                    when {
+                        age <= 13 -> Constant.BASE_BADMINTON_FEE / 2
+                        age < 66 -> Constant.BASE_BADMINTON_FEE
+                        else -> Constant.BADMINTON_FEE_1600
+                    }
                 }
             }
         }
     }
 
     fun genderChangedMale(isChecked: Boolean) {
-        if (isChecked)
-            member.value = No8Member(
-                age = member.value?.age ?: 0, gender = Constant.Gender.MALE
-            )
+        if (isChecked) {
+            member.value = No8Member(age = member.value?.age ?: 0, gender = Constant.Gender.MALE)
+        }
     }
 
     fun genderChangedFemale(isChecked: Boolean) {
@@ -72,8 +72,12 @@ class ExerciseEightViewModel : BaseViewModel() {
     }
 
     fun ageChanged(newVal: Int) {
+        var gender =  Constant.Gender.MALE
+        member.value?.apply {
+            gender = this.gender
+        }
         member.value = No8Member(
-            age = newVal, gender = member.value?.gender ?: Constant.Gender.MALE
+            age = newVal, gender = gender
         )
     }
 }

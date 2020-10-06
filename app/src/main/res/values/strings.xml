@@ -65,7 +65,7 @@
     </string>
 
     <!--Text use for exercise 3-->
-    <string name="condition_3">
+    <string name="condition_3" formatted="false">
         Điều kiện tiên quyết：\n
 ①：Trong số các mặt hàng mua, có cả áo sơ mi trắng và cà vạt, thì sẽ được giảm 5% trên tổng hoá đơn.  \n
 ②：Trường hợp mua từ trên 7 mặt hàng, được giảm 7% trên tổng hoá đơn. \n

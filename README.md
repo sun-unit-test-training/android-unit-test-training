@@ -1,9 +1,5 @@
-# android-unit-test-training
-
-Require Java 8
+# Run unit test with coverage
 Run ./gradlew testDevelopDebugUnitTestCoverage
-location coverage: app/build/reports/jacoco/...
-
-Rule for PR exercise:
-- Update image UI
-- Update image coverage
+Location coverage:
+- app/build/reports/jacoco/testDevelopDebugUnitTestCoverage/html/index.html
+- exercise_ten/build/reports/jacoco/testDevelopDebugUnitTestCoverage/html/index.html

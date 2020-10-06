@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import com.example.exercise_ten.R
 import com.sun.training.ut.exercise_ten.*
 import com.sun.training.ut.exercise_ten.data.model.Invoice
+import com.sun.training.ut.exercise_ten.data.model.MemberClassType
 import junit.framework.TestCase.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -32,7 +33,44 @@ class ExerciseTenViewModelUnitTest {
         MockitoAnnotations.initMocks(this)
         `when`(resource.getString(R.string.ex_10_user_name_default))
             .thenReturn("Bach Ngoc Hoai")
+        `when`(resource.getString(R.string.ex_10_class_type_black))
+            .thenReturn("Hạng Đen")
+        `when`(resource.getString(R.string.ex_10_class_type_gold))
+            .thenReturn("Hạng Vàng")
+        `when`(resource.getString(R.string.ex_10_class_type_silver))
+            .thenReturn("Hạng Bạc")
         tenViewModel = ExerciseTenViewModel(resource)
+    }
+
+    @Test
+    fun updateMemberClassType_withTypeBlack_willReceive_BackClass() {
+        tenViewModel.updateMemberClassType("Hạng Đen")
+        assertEquals(tenViewModel.user.value?.classType, MemberClassType.BLACK_CLASS)
+    }
+
+    @Test
+    fun updateMemberClassType_withTypeGold_willReceive_GoldClass() {
+        tenViewModel.updateMemberClassType("Hạng Vàng")
+        assertEquals(tenViewModel.user.value?.classType, MemberClassType.GOLD_CLASS)
+    }
+
+    @Test
+    fun updateMemberClassType_withTypeSilver_willReceive_SilverClass() {
+        tenViewModel.updateMemberClassType("Hạng Bạc")
+        assertEquals(tenViewModel.user.value?.classType, MemberClassType.SILVER_CLASS)
+    }
+
+    @Test
+    fun updateMemberClassType_withTypeEmpty_willReceive_Unknown() {
+        tenViewModel.updateMemberClassType("")
+        assertEquals(tenViewModel.user.value?.classType, MemberClassType.UNKNOWN_CLASS)
+    }
+
+    @Test
+    fun updateMemberClassType_withUserNull_willReceive_Null() {
+        tenViewModel.user.value = null
+        tenViewModel.updateMemberClassType("")
+        assertEquals(tenViewModel.user.value?.classType, null)
     }
 
     @Test
@@ -44,6 +82,15 @@ class ExerciseTenViewModelUnitTest {
         tenViewModel.subTotal.value = paymentAmount.toString()
 
         assertEquals(tenViewModel.discountCalculation(paymentAmount), paymentAmount * 0.0)
+    }
+
+    @Test
+    fun discountCalculate_withUserValueNull_andPaymentLessThan3K_willReceive_0() {
+        val paymentAmount = 2900.0
+
+        tenViewModel.subTotal.value = paymentAmount.toString()
+        tenViewModel.user.value = null
+        assertEquals(tenViewModel.discountCalculation(paymentAmount), 0.0)
     }
 
     @Test
@@ -350,12 +397,48 @@ class ExerciseTenViewModelUnitTest {
 
         val currentDiscount = tenViewModel.discountCalculation(paymentAmount)
         val currentGiftAccepted = tenViewModel.giftAccepted(paymentAmount)
-
         tenViewModel.printInvoice()
         tenViewModel.invoice.value?.run {
             assertEquals(subTotal, paymentAmount)
             assertEquals(discount, currentDiscount)
             assertEquals(total, paymentAmount - currentDiscount)
+            assertEquals(giftAccepted, currentGiftAccepted)
+        }
+    }
+
+    @Test
+    fun checkInvoice_withUserSilver_andPaymentAny_totalNull_willReturnInformation() {
+        val userSilver = createUserTypeSilverClass()
+        val paymentAmount = Random.nextDouble(Double.MAX_VALUE)
+
+        val observer = mock<Observer<Invoice>>()
+        tenViewModel.invoice.observeForever(observer)
+        tenViewModel.user.value = userSilver
+        val currentGiftAccepted = tenViewModel.giftAccepted(paymentAmount)
+        tenViewModel.printInvoice()
+        tenViewModel.invoice.value?.run {
+            assertEquals(subTotal, 0.0)
+            assertEquals(discount, 0.0)
+            assertEquals(total, 0.0)
+            assertEquals(giftAccepted, currentGiftAccepted)
+        }
+    }
+
+    @Test
+    fun checkInvoice_withUserSilver_andPaymentAny_totalInvalid_willReturnInformation() {
+        val userSilver = createUserTypeSilverClass()
+        val paymentAmount = Random.nextDouble(Double.MAX_VALUE)
+
+        val observer = mock<Observer<Invoice>>()
+        tenViewModel.invoice.observeForever(observer)
+        tenViewModel.user.value = userSilver
+        tenViewModel.subTotal.value = "abc"
+        val currentGiftAccepted = tenViewModel.giftAccepted(paymentAmount)
+        tenViewModel.printInvoice()
+        tenViewModel.invoice.value?.run {
+            assertEquals(subTotal, 0.0)
+            assertEquals(discount, 0.0)
+            assertEquals(total, 0.0)
             assertEquals(giftAccepted, currentGiftAccepted)
         }
     }

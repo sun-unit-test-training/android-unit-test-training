@@ -12,6 +12,7 @@ import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
+import kotlin.jvm.Throws
 
 @RunWith(MockitoJUnitRunner::class)
 class ExerciseFiveViewModelTest {
@@ -54,6 +55,7 @@ class ExerciseFiveViewModelTest {
         viewModel.onChangedDelivery(true)
         viewModel.onChangedVoucher(true)
         viewModel.calculateCouponWithPizza()
+        assertEquals(1499, viewModel.totalPrice)
         assertEquals(Constant.Coupon.OFF_20.coupon, viewModel.discountLiveData.value)
     }
 

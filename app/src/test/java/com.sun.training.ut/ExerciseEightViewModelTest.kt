@@ -20,7 +20,7 @@ import org.mockito.junit.MockitoJUnitRunner
 import kotlin.jvm.Throws
 
 @RunWith(MockitoJUnitRunner::class)
-class ExerciseEightTest {
+class ExerciseEightViewModelTest {
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
@@ -32,6 +32,15 @@ class ExerciseEightTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         viewModel = ExerciseEightViewModel()
+    }
+
+    /**
+     * Age: < 0
+     * Gender: Any
+     */
+    @Test
+    fun validateMemberAge_MemberNull_LesserThanMin_ReturnFalse() {
+        assertEquals(false, viewModel.validateMemberAge(null))
     }
 
     /**
@@ -70,8 +79,88 @@ class ExerciseEightTest {
      */
     @Test
     fun validateMemberAge_CorrectAge_ReturnTrue() {
+        viewModel.member.value = No8Member(19, Constant.Gender.MALE)
         viewModel.ageChanged(23)
         assertEquals(true, viewModel.validateMemberAge(viewModel.member.value))
+    }
+
+    @Test
+    fun genderChangedMale_CheckTrue_ReturnMale() {
+        viewModel.genderChangedMale(true)
+        assertEquals(Constant.Gender.MALE, viewModel.member.value?.gender)
+    }
+
+    @Test
+    fun genderChangedMale_CheckFalse_ReturnMemberNull() {
+        viewModel.genderChangedMale(false)
+        assertEquals(null, viewModel.member.value)
+    }
+
+    @Test
+    fun genderChangedFemale_CheckTrue_ReturnFemale() {
+        viewModel.genderChangedFemale(true)
+        assertEquals(Constant.Gender.FEMALE, viewModel.member.value?.gender)
+    }
+
+    @Test
+    fun genderChangedFemale_CheckFalse_ReturnMemberNull() {
+        viewModel.genderChangedFemale(false)
+        assertEquals(null, viewModel.member.value)
+    }
+
+    @Test
+    fun calculateBadmintonFee_DayOfWeekNull_ReturnNull() {
+        viewModel.dayOfWeek = null
+        viewModel.calculateBadmintonFee()
+        assertEquals(null, viewModel.fee.value)
+    }
+
+    @Test
+    fun calculateBadmintonFee_MemberNull_ReturnNull() {
+        viewModel.member.value = null
+        viewModel.dayOfWeek = DayOfWeek.WEDNESDAY
+        viewModel.calculateBadmintonFee()
+        assertEquals(null, viewModel.fee.value)
+    }
+
+    @Test
+    fun calculateBadmintonFee_InvalidAge_ReturnNull() {
+        viewModel.ageChanged(-1)
+        viewModel.dayOfWeek = DayOfWeek.WEDNESDAY
+        viewModel.calculateBadmintonFee()
+        assertEquals(null, viewModel.fee.value)
+    }
+
+
+    /**
+     * Age: >= 13, <= 65
+     * Gender: Any
+     * DayOfWeek: Not Tuesday, not Friday
+     */
+    @Test
+    fun calculateBadmintonFee_MemberWithGenderNull_NotTuesday_NotFriday_Return1800() {
+        viewModel.ageChanged(25)
+        viewModel.genderChangedMale(true)
+        viewModel.dayOfWeek = DayOfWeek.WEDNESDAY
+        viewModel.calculateBadmintonFee()
+        assertEquals(DayOfWeek.WEDNESDAY, viewModel.dayOfWeek)
+        assertEquals(BASE_BADMINTON_FEE, viewModel.fee.value)
+    }
+
+    /**
+     * Age: >= 13, <= 65
+     * Gender: Any
+     * DayOfWeek: Not Tuesday, not Friday
+     */
+    @Test
+    fun calculateBadmintonFee_MemberNull_NotTuesday_NotFriday_Return1800() {
+        viewModel.member.value = null
+        viewModel.ageChanged(25)
+        viewModel.genderChangedMale(true)
+        viewModel.dayOfWeek = DayOfWeek.WEDNESDAY
+        viewModel.calculateBadmintonFee()
+        assertEquals(DayOfWeek.WEDNESDAY, viewModel.dayOfWeek)
+        assertEquals(BASE_BADMINTON_FEE, viewModel.fee.value)
     }
 
     /**
@@ -85,6 +174,7 @@ class ExerciseEightTest {
         viewModel.genderChangedMale(true)
         viewModel.dayOfWeek = DayOfWeek.WEDNESDAY
         viewModel.calculateBadmintonFee()
+        assertEquals(DayOfWeek.WEDNESDAY, viewModel.dayOfWeek)
         assertEquals(BASE_BADMINTON_FEE, viewModel.fee.value)
     }
 
@@ -213,6 +303,7 @@ class ExerciseEightTest {
         viewModel.calculateBadmintonFee()
         assertEquals(BASE_BADMINTON_FEE / 2, viewModel.fee.value)
     }
+
 
     /**
      * Age: < 13

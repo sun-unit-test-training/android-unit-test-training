@@ -10,6 +10,7 @@ import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
+import kotlin.jvm.Throws
 
 @RunWith(MockitoJUnitRunner::class)
 class ExerciseSixViewModelTest {
@@ -31,6 +32,7 @@ class ExerciseSixViewModelTest {
         viewModel.totalPurchased = -1
         viewModel.onWatchMovieChecked(false)
         viewModel.calculateMinute()
+        Assert.assertEquals(-1, viewModel.totalPurchased)
         Assert.assertEquals(0, viewModel.freeParkingInMinute.value)
     }
 

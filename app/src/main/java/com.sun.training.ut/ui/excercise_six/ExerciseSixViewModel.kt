@@ -1,6 +1,5 @@
 package com.sun.training.ut.ui.excercise_six
 
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.MutableLiveData
 import com.sun.training.ut.ui.base.BaseViewModel
 
@@ -33,10 +32,9 @@ class ExerciseSixViewModel : BaseViewModel() {
      */
 
     fun calculateMinute() {
-        val totalMoney = totalPurchased
         val freeTimeByTotalMoney = when {
-            totalMoney < FIRST_MONEY_POINT -> 0
-            totalMoney in FIRST_MONEY_POINT until SECOND_MONEY_POINT -> FIRST_FREE_TIME
+            totalPurchased < FIRST_MONEY_POINT -> 0
+            totalPurchased < SECOND_MONEY_POINT -> FIRST_FREE_TIME
             // SECOND_MONEY_POINT <= totalMoney
             else -> SECOND_FREE_TIME
         }

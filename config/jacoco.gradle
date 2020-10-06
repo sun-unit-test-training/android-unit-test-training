@@ -51,8 +51,11 @@ project.afterEvaluate {
                              '**/data/*.*',
                              '**/repository/**/*.*',
                              '**/home/*.*',
-                             '**/databinding/*.*'
+                             '**/databinding/*.*',
+                             '**/SingleLiveData*',
+                             '**/business/*.*'
             ]
+
             def javaClasses = fileTree(dir: variant.javaCompiler.destinationDir, excludes: excludes)
             def kotlinClasses = fileTree(dir: "${buildDir}/tmp/kotlin-classes/${variantName}", excludes: excludes)
             classDirectories.from = files([javaClasses, kotlinClasses])  // Line 18
@@ -87,4 +90,5 @@ project.afterEvaluate {
 
 tasks.withType(Test) {
     jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
 }
