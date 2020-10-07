@@ -11,6 +11,7 @@ import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
+import kotlin.jvm.Throws
 
 @RunWith(MockitoJUnitRunner::class)
 class ExerciseThreeViewModelTest {
@@ -70,6 +71,7 @@ class ExerciseThreeViewModelTest {
         viewModel.onChangedTie(true)
         viewModel.onChangedShirt(true)
         viewModel.calculate()
+        assertEquals(Constant.DEFAULT_ITEM_HAVE_DISCOUNT, viewModel.numberOfItems)
         assertEquals(Constant.DISCOUNT_12, viewModel.discountLiveData.value)
     }
 

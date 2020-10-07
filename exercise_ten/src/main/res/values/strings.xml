@@ -15,10 +15,10 @@
     <string name="ex_10_invoice_title">Hoá đơn thanh toán</string>
     <string name="ex_10_invoice_gift_title">Nhận quà</string>
     <string name="ex_10_invoice_gift_message">Chúc mừng bạn đã nhận được món quà.\nCảm ơn bạn đã sử dụng dịch vụ của chúng tôi</string>
-    <string name="ex_10_invoice_information">Khách hàng: %s\nHội viên hạng: %s\nDịch vụ: %.2f円\nGiảm giá dịch vụ: %.2f円\n--------------------------------------\nSố tiền cần thanh toán: %.2f円\n
+    <string name="ex_10_invoice_information" formatted="false">Khách hàng: %s\nHội viên hạng: %s\nDịch vụ: %.2f円\nGiảm giá dịch vụ: %.2f円\n--------------------------------------\nSố tiền cần thanh toán: %.2f円\n
     </string>
 
-    <string name="ex_10_information">
+    <string name="ex_10_information" formatted="false">
         ◎Exercise \n
         Tại nhà hàng Nam Từ Liêm đang áp dụng chế độ hội viên hình thức thẻ prepaid card.\n
         ---\n

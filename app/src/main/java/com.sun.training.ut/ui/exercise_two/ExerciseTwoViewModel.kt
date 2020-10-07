@@ -25,7 +25,7 @@ class ExerciseTwoViewModel : BaseViewModel() {
         this.minute = minute
     }
 
-    fun onDateChanged(monthOfYear: Int, dayOfMonth: Int) {
+    fun onDateChanged(dayOfMonth: Int, monthOfYear: Int) {
         this.monthOfYear = monthOfYear + 1
         this.dayOfMonth = dayOfMonth
     }

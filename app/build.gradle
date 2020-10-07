@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply from: 'config/jacoco.gradle'
+apply from: '../config/jacoco.gradle'
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
@@ -40,6 +40,8 @@ android {
     buildTypes {
         debug {
             debuggable true
+            testCoverageEnabled true
+            minifyEnabled false
         }
 
         release {
@@ -69,8 +71,9 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding true
+        dataBinding true
     }
 
     compileOptions {
@@ -89,14 +92,6 @@ android {
     }
     dynamicFeatures = [':exercise_ten']
 }
-
-tasks.withType(Test) {
-//    // Whether or not classes without source location should be instrumented
-    jacoco.includeNoLocationClasses = true
-    jacoco.excludes = ['jdk.internal.*']
-}
-
-
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

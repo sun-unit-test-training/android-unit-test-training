@@ -61,7 +61,7 @@ class ExerciseSevenViewModelTest : BaseTestViewModel<ExerciseSevenViewModel>() {
         every { viewModel["calculateError"]() } returns Unit
 
         viewModel.calculateFee()
-
+        Assert.assertEquals(0, viewModel.money)
         verify(exactly = 1) { viewModel["calculateError"]() }
         verify(exactly = 0) {
             viewModel["calculateMoney"]()

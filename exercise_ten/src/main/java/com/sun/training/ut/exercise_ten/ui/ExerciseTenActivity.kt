@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.lifecycle.Observer
 import com.example.exercise_ten.R
 import com.example.exercise_ten.databinding.ActivityExerciseTenBinding
 import com.sun.training.ut.BR
@@ -37,7 +38,8 @@ class ExerciseTenActivity : BaseActivity<ActivityExerciseTenBinding, ExerciseTen
     }
 
     private fun subscriberUI() = with(viewModel) {
-        invoice.observe(this@ExerciseTenActivity) { invoice ->
+        invoice.observe(this@ExerciseTenActivity, Observer {
+                invoice ->
             user.value?.let { u ->
                 val message = String.format(
                     getString(R.string.ex_10_invoice_information),
@@ -62,11 +64,7 @@ class ExerciseTenActivity : BaseActivity<ActivityExerciseTenBinding, ExerciseTen
                     .create()
                     .show()
             } ?: showUserEmpty()
-        }
-
-        user.observe(this@ExerciseTenActivity) { user ->
-            viewBinding.userLabel.text = user.userName
-        }
+        })
     }
 
     private fun setupUI() {
@@ -77,7 +75,6 @@ class ExerciseTenActivity : BaseActivity<ActivityExerciseTenBinding, ExerciseTen
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             viewBinding.member.adapter = adapter
-            viewBinding.member.setSelection(viewModel.getMemberPosition())
         }
 
         viewBinding.member.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

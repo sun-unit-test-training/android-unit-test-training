@@ -155,7 +155,7 @@ class ExerciseTwoViewModelTest {
     @Test
     fun validatePrice_noVip_holiday_timeOutLower_return110() {
         viewModel.onTimeChanged(8, 44)
-        viewModel.onDateChanged(30, 4)
+        viewModel.onDateChanged(30, 3)
         viewModel.onVipChecked(false)
         viewModel.calculateFee()
         assertEquals(110, viewModel.feeLiveData.value)
@@ -164,7 +164,7 @@ class ExerciseTwoViewModelTest {
     @Test
     fun validatePrice_noVip_holiday_timeOutUpper_return110() {
         viewModel.onTimeChanged(18, 0)
-        viewModel.onDateChanged(30, 4)
+        viewModel.onDateChanged(30, 3)
         viewModel.onVipChecked(false)
         viewModel.calculateFee()
         assertEquals(110, viewModel.feeLiveData.value)
